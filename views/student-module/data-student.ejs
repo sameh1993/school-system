@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../parts/head") %>
+
+<body dir="rtl">
+
+  <!-- start side bar  -->
+  <%- include("../parts/side-bar")%>
+  <!--/.sidebar-->
+
+
+
+  <div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+    <h4 class="text-center text-capitalize main-title"> مدرسه السلام المشتركه ف 2 </h4>
+    <div class="row">
+      <ol class="breadcrumb">
+        <li><a href="#">
+            <em class="fa fa-home"></em>
+          </a></li>
+        <li class="">الطلاب</li>
+        <li class="active">أضافه طالب جديد</li>
+      </ol>
+    </div>
+    <!--/.row-->
+
+    <div class="body">
+
+      <div class="data-student">
+
+        <% if(student) { %>
+        <h3 class="text-center"> بيانات الطالب </h3>
+        <div class="row">
+          <div class="col-md-3">
+            <img src="/image/students/<%= student.image %>" class="img-responsive">
+          </div>
+          <div class="col-md-9">
+            <ul class="list-unstyled">
+              <li> <span> الرقم القومي </span> : <%= student.ssn %> </li>
+              <li> <span> كود الطالب </span> : <%= student.student_id %> </li>
+              <li> <span> الاسم بالكامل </span> : <%= student.f_name + ' ' + student.l_name %> </li>
+              <li> <span> العنوان </span> : <%= student.address %> </li>
+              <li> <span> الجنسيه </span> : <%= student.nationality %> </li>
+              <li> <span> النوع </span> : <%= student.sex ? 'ذكر' : 'أنثى' %> </li>
+              <li> <span> تاريخ الميلاد </span> : <%= student.b_date %> </li>
+              <li> <span> الفصل </span> : <%= student.class_name %> </li>
+              <li> <span> رقم الوالد </span> : <%= student.parent_no %> </li>
+              <li> <span> رقم البيت </span> : <%= student.parent_no2 %> </li>
+              <li> <span> الحاله القيد </span> : <%= student.student_status %> </li>
+            </ul>
+          </div>
+            <form method="POST" action="/student/delete">
+              <input type="hidden" name="image" value="<%= student.image %>">
+              <input type="hidden" name="ssn" value="<%= student.ssn %>">
+              <button type="submit" class="btn btn-danger">
+                حذف الطالب
+              </button>
+            </form>
+        </div>
+        <% } else {  %>
+        <div class="alert alert-danger text-center"> there are not any students </div>
+        <%}%>
+        </div>
+
+    </div>
+
+  </div>
+  <!--/.main-->
+</body>
+
+</html>

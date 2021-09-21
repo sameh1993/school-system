@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<%- include("parts/head") %>
+
+<body dir="rtl">
+
+	<!-- start side bar  -->
+	<%- include("parts/side-bar")%>
+	<!--/.sidebar-->
+
+	<div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+		<h4 class="text-center text-capitalize main-title"> مدرسه <%= SchoolName %> </h4>
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+						<em class="fa fa-home"></em>
+					</a></li>
+				<li class="active">الطلاب</li>
+			</ol>
+		</div>
+		<!--/.row-->
+
+		<div class="querys">
+
+			<ul class="list-unstyled links">
+				<li><a href="/student/add"> أضافه طالب جديد </a></li>
+				<li data-show="search-form" class="view"> الاستعلام عن بيانات طالب </li>
+				<li data-show="classList-form" class="view"> الاستعلام عن قوائم الفصول </li>
+				<li data-show="convert-form" class="view"> تحويل طالب من صف الى اخر </li>
+				<!-- <li data-show="delete-form" class="view"> حذف طالب </li> -->
+			</ul>
+		</div>
+
+
+	</div>
+	<!--/.main-->
+
+
+	<!-- start forms -->
+
+	<div class="fixed search-form">
+		<i class="fa fa-window-close"></i>
+		<form action="/student/search" method="GET" class="form">
+			<div class="form-group">
+				<label> نوع البحث </label>
+				<select class="form-control typeSearch" name="search">
+					<option selected> أختر من القائمه </option>
+					<option value="ssn"> البحث بالرقم القومي </option>
+					<option value="name"> البحث بالاسم </option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label> رقم القومي او اسم الطالب </label>
+				<input class="form-control searchValue" type="text" placeholder="أدخل رقم القومى او اسم الطالب"
+					name="searchValue">
+			</div>
+
+			<% if(controlLevel == 'teacher') {  %>
+				<div class="form-group relative">
+					<label> حدد الفصل </label>
+					<select class="form-control" id="class" name="class">
+						<option value="" selected> أخنر من القائمه </option>
+						<% allClass = classList.filter(item =>  {
+							return arrowedClasses.filter(anotherItem => {
+								return item.id === anotherItem.id
+							})
+						} ) %>
+						<% for(let clss of allClass) {  %>
+							<option value="<%= clss.id %>"> <%= clss.class_name %> </option>
+						<% } %>
+					</select>
+					<i class="fa fa-angle-down"></i>
+				</div>
+			<% } %>
+
+			<button type="submit" class="btn btn-primary"> أرسال </button>
+		</form>
+	</div>
+
+	<div class="fixed classList-form">
+		<i class="fa fa-window-close"></i>
+		<form action="/student/classlist" method="GET" class="form">
+
+			<div class="form-group relative">
+				<label> حدد الصف </label>
+				<select class="form-control relative" id="level" name="level">
+					<option value="" selected> أخنر من القائمه </option>
+					<% for(let level of levels) {  %>
+					<option value="<%= level.level_id %>"> <%= level.level_name %> </option>
+					<% } %>
+				</select>
+				<i class="fa fa-angle-down"></i>
+			</div>
+
+			<div class="form-group relative">
+				<label> حدد الفصل </label>
+				<select class="form-control" id="class" name="class">
+					<option value="" selected> أخنر من القائمه </option>
+				</select>
+				<i class="fa fa-angle-down"></i>
+			</div>
+
+			<button type="submit" class="btn btn-primary"> أرسال </button>
+		</form>
+	</div>
+
+	<div class="fixed convert-form">
+		<i class="fa fa-window-close"></i>
+		<form action="/student/level-convert" method="GET" class="form">
+			<div class="form-group">
+				<label> تحويل طالب </label>
+				<select class="form-control" name="search">
+					<option selected value="ssn"> الرقم القومي </option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label> رقم القومي</label>
+				<input class="form-control" name="ssn" type="number" placeholder="أدخل رقم القومى" />
+			</div>
+
+			<button type="submit" class="btn btn-primary"> أرسال </button>
+		</form>
+	</div>
+
+
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/custom.js"></script>
+	<script>
+		window.onload = function () {
+			var chart1 = document.getElementById("line-chart").getContext("2d");
+			window.myLine = new Chart(chart1).Line(lineChartData, {
+				responsive: true,
+				scaleLineColor: "rgba(0,0,0,.2)",
+				scaleGridLineColor: "rgba(0,0,0,.05)",
+				scaleFontColor: "#c5c7cc"
+			});
+		};
+
+		var test = '<%- JSON.stringify(classList) %>';
+		const classList = JSON.parse(test)
+		$("#level").change(function () {
+			$("#class").html("<option selected> أختر من القائمه </option>")
+			for (let i = 0; i < classList.length; i++) {
+				if (classList[i].level_id == $(this).val()) {
+					$("#class").append(`<option value="${classList[i].id}" > ${classList[i].class_name} </option>`)
+				}
+			}
+		})
+
+		$(".typeSearch").change(function () {
+
+			if ($(this).val() == 'ssn') {
+				console.log($(this).val())
+				$('.searchValue').attr('type', "number")
+			} else {
+				$('.searchValue').attr('type', "text")
+			}
+		})
+	</script>
+
+</body>
+
+</html>

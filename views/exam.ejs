@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<%- include("parts/head") %>
+
+<body dir="rtl">
+
+	<!-- start side bar  -->
+	<%- include("parts/side-bar")%>
+	<!--/.sidebar-->
+
+		<!-- forms -->
+
+		<div class="fixed committees-form">
+				<i class="fa fa-window-close"></i>
+				<form action="/exam/get-committees" method="POST" class="form">
+					<div class="form-group">
+						<label> ادخل الصف </label>
+						<select class="form-control" name="level">
+							<option selected> أختر من القائمه </option>
+							<option value="1"> الصف الاول </option>
+							<option value="2"> الصف الثانى </option>
+							<option value="3"> الصف الثالث </option>
+							<option value="4"> الصف الرابع </option>
+							<option value="5"> الصف الخامس </option>
+							<option value="6"> الصف السادس </option>
+						</select>
+					</div>
+		
+					<div class="form-group">
+						<label> ادخل النوع </label>
+						<select class="form-control" name="sex">
+							<option selected> أختر من القائمه </option>
+							<option value="1"> ذكور </option>
+							<option value="0"> اناث </option>
+						</select>
+					</div>
+		
+					<button type="submit" class="btn btn-primary"> أرسال </button>
+				</form>
+			</div>
+		
+			<div class="fixed committees-form">
+				<i class="fa fa-window-close"></i>
+				<form action="/exam/get-committees" method="POST" class="form">
+					<div class="form-group">
+						<label> ادخل الصف </label>
+						<select class="form-control" name="level">
+							<option selected> أختر من القائمه </option>
+							<option value="1"> الصف الاول </option>
+							<option value="2"> الصف الثانى </option>
+							<option value="3"> الصف الثالث </option>
+							<option value="4"> الصف الرابع </option>
+							<option value="5"> الصف الخامس </option>
+							<option value="6"> الصف السادس </option>
+						</select>
+					</div>
+		
+					<div class="form-group">
+						<label> ادخل النوع </label>
+						<select class="form-control" name="sex">
+							<option selected> أختر من القائمه </option>
+							<option value="1"> ذكور </option>
+							<option value="0"> اناث </option>
+						</select>
+					</div>
+		
+					<button type="submit" class="btn btn-primary"> أرسال </button>
+				</form>
+			</div>
+		
+		
+		
+		
+			<div class="fixed first-term-form">
+				<i class="fa fa-window-close"></i>
+				<form action="/exam/enter-f-term" method="GET" class="form">
+					<div class="form-group">
+						<label> ادخل الصف </label>
+						<select class="form-control levelForTerm" name="level">
+							<option selected> أختر من القائمه </option>
+							<option value="1"> الصف الاول </option>
+							<option value="2"> الصف الثانى </option>
+							<option value="3"> الصف الثالث </option>
+							<option value="4"> الصف الرابع </option>
+							<option value="5"> الصف الخامس </option>
+							<option value="6"> الصف السادس </option>
+						</select>
+					</div>
+		
+					<div class="form-group">
+						<label> ادخل الماده </label>
+						<select class="form-control subject" name="subjectId">
+							<option selected> أختر من القائمه </option>
+		
+						</select>
+					</div>
+		
+					<button type="submit" class="btn btn-primary"> أرسال </button>
+				</form>
+			</div>
+		
+			<div class="fixed last-term-form">
+				<i class="fa fa-window-close"></i>
+				<form action="/exam/enter-l-term" method="GET" class="form">
+					<div class="form-group">
+						<label> ادخل الصف </label>
+						<select class="form-control levelForTerm" name="level">
+							<option selected> أختر من القائمه </option>
+							<option value="1"> الصف الاول </option>
+							<option value="2"> الصف الثانى </option>
+							<option value="3"> الصف الثالث </option>
+							<option value="4"> الصف الرابع </option>
+							<option value="5"> الصف الخامس </option>
+							<option value="6"> الصف السادس </option>
+						</select>
+					</div>
+		
+					<div class="form-group">
+						<label> ادخل الماده </label>
+						<select class="form-control subject" name="subjectId">
+							<option selected> أختر من القائمه </option>
+		
+						</select>
+					</div>
+		
+					<button type="submit" class="btn btn-primary"> أرسال </button>
+				</form>
+			</div>
+		
+		
+			<div class="fixed first-term-result">
+				<i class="fa fa-window-close"></i>
+				<form action="/exam/first-term-result" method="GET" class="form">
+					<div class="form-group">
+						<label> ادخل الصف </label>
+						<select class="form-control levelForTerm" name="levelId">
+							<option selected> أختر من القائمه </option>
+							<option value="1"> الصف الاول </option>
+							<option value="2"> الصف الثانى </option>
+							<option value="3"> الصف الثالث </option>
+							<option value="4"> الصف الرابع </option>
+							<option value="5"> الصف الخامس </option>
+							<option value="6"> الصف السادس </option>
+						</select>
+					</div>
+		
+					<!-- <div class="form-group">
+						<label> ادخل الماده </label>
+						<select class="form-control subject" name="subjectId">
+							<option selected> أختر من القائمه </option>
+		
+						</select>
+					</div> -->
+		
+					<button type="submit" class="btn btn-primary"> أرسال </button>
+				</form>
+			</div>
+		
+			<div class="fixed last-term-result">
+				<i class="fa fa-window-close"></i>
+				<form action="/exam/last-term-result" method="GET" class="form">
+					<div class="form-group">
+						<label> ادخل الصف </label>
+						<select class="form-control levelForTerm" name="levelId">
+							<option selected> أختر من القائمه </option>
+							<option value="1"> الصف الاول </option>
+							<option value="2"> الصف الثانى </option>
+							<option value="3"> الصف الثالث </option>
+							<option value="4"> الصف الرابع </option>
+							<option value="5"> الصف الخامس </option>
+							<option value="6"> الصف السادس </option>
+						</select>
+					</div>
+		
+					<!-- <div class="form-group">
+						<label> ادخل الماده </label>
+						<select class="form-control subject" name="subjectId">
+							<option selected> أختر من القائمه </option>
+		
+						</select>
+					</div> -->
+		
+					<button type="submit" class="btn btn-primary"> أرسال </button>
+				</form>
+			</div>
+
+	<div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+		<h4 class="text-center text-capitalize main-title"> مدرسه السلام المشتركه ف 1 </h4>
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+						<em class="fa fa-home"></em>
+					</a></li>
+				<li class="active"> الامتحانات </li>
+			</ol>
+		</div>
+		<!--/.row-->
+
+		<div class="querys">
+
+			<ul class="list-unstyled links">
+				<% if(committeesCount == 0) {  %>
+				<li><a href="/exam/create-committees"> انشاء لجان الامتحانات </a></li>
+				<% } %>
+				<li data-show="committees-form" class="view"> طباعه لجان الامتحان </li>
+				<li data-show="first-term-form" class="view"> أدخال درجات الترم الاول </li>
+				<li data-show="last-term-form" class="view"> أدخال درجات الترم الثانى </li>
+				<li data-show="first-term-result" class="view"> طباعه نتيجه الترم الاول </li>
+				<li data-show="last-term-result" class="view"> طباعه نتيجه الترم الثانى </li>
+				<!-- <li data-show="delete-form" class="view"> حذف طالب </li> -->
+			</ul>
+		</div>
+
+
+	</div>
+	<!--/.main-->
+
+
+
+
+
+
+
+
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/custom.js"></script>
+	<script>
+		window.onload = function () {
+			var chart1 = document.getElementById("line-chart").getContext("2d");
+			window.myLine = new Chart(chart1).Line(lineChartData, {
+				responsive: true,
+				scaleLineColor: "rgba(0,0,0,.2)",
+				scaleGridLineColor: "rgba(0,0,0,.05)",
+				scaleFontColor: "#c5c7cc"
+			});
+		};
+
+		const test = '<%- JSON.stringify(subjects) %>'
+		const subjects = JSON.parse(test)
+		$(".levelForTerm").change(function () {
+			console.log($(this).val())
+			$(".subject").html('<option selected >  أختر من القائمه </option>')
+			for (let i = 0; i < subjects.length; i++) {
+				if (subjects[i].sub_level == +$(this).val()) {
+					$(".subject").append(`<option value="${subjects[i].id}" > ${subjects[i].sub_name} </option>`)
+				}
+			}
+		})
+	</script>
+
+</body>
+
+</html>

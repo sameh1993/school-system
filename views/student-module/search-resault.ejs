@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../parts/head") %>
+
+<body dir="rtl">
+
+
+  <!-- start side bar  -->
+  <%- include("../parts/side-bar")%>
+  <!--/.sidebar-->
+
+
+
+  <div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+    <h4 class="text-center text-capitalize main-title"> مدرسه السلام المشتركه ف 2 </h4>
+    <div class="row">
+      <ol class="breadcrumb">
+        <li><a href="#">
+            <em class="fa fa-home"></em>
+          </a></li>
+        <li class="">الطلاب</li>
+        <li class="active">أضافه طالب جديد</li>
+      </ol>
+    </div>
+    <!--/.row-->
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col"> الرقم القومي </th>
+          <th scope="col">الاسم بالكامل</th>
+          <th scope="col">الفصل</th>
+          <th scope="col">رقم المحمول</th>
+          <th scope="col"> # </th>
+        </tr>
+      </thead>
+      <tbody>
+       <% if (students) {  %>
+        <% for(let student of students) {  %>
+          <tr>
+              <td> <%= student.ssn %> </td>
+              <td> <a href="/student/<%= student.ssn %>"> <%= student.fullName %> </a>  </td>
+              <td> <%= student.class_name %> </td>
+              <td> <%= student.parent_no %> </td>
+              <!--
+               <td> 
+                <button type="button" class="btn btn-warning">
+                  Edit
+                </button>
+              </td> -->
+              <td>
+                <form method="POST" action="/student/delete" >
+                  <input type="hidden" name="image" value="<%= student.image %>">
+                  <input type="hidden" name="ssn" value="<%= student.ssn %>">
+                  <button type="submit">
+                      <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </td>
+  
+            </tr>
+          <% } %>
+        <% } else { %>
+          <div class="alert alert-danger"> there are not any students </div>
+        <% } %>
+
+      </tbody>
+    </table>
+
+  </div>
+  <!--/.main-->
+<!-- 
+  <div class="fixed form-edit">
+      <form method="POST" action="/student/edit">
+        <input type="hidden" name="ssn" value="student.ssn">
+        
+      </form>  
+  </div> -->
+</body>
+
+</html>

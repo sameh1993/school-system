@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../parts/head')%>
+
+<body dir="rtl">
+  <h2 class="text-center"> نتيجه الترم الاول </h2>
+
+  <div class="container">
+
+    <% for(let student of students) {  %>
+
+    <% currentStudent = examsresult.filter(item => item.student_id == student.ssn) %>
+
+
+    <% if([1, 2, 3].includes(+levelID)) {  %>
+    <div class="result">
+      <div class="row">
+        <div class="head-result">
+          <div class="col-md-6">
+            <p> <span> المحافظه </span>: <%= dataSchool.city_name %> </p>
+            <p> <span> الاداره </span>: <%= dataSchool.organiztion %> </p>
+            <p> <span> مدرسه </span>: <%= dataSchool.school_name %> </p>
+            <p> <span> أسم الطالب</span>: <%= student.f_name + ' ' + student.l_name %> </p>
+          </div>
+          <div class="col-md-6">
+            <p> نتيجه الترم الاول </p>
+            <p> لعام 2021/2020 </p>
+            <p> <span> رقم الجلوس </span>: <%= student.sitting_no %> </p>
+          </div>
+        </div>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"> الدرجه / الماده </th>
+            <th scope="col">اللغه العربيه</th>
+            <th scope="col">رياضيات</th>
+            <th scope="col"> E </th>
+            <th scope="col">نشاط</th>
+            <th scope="col">نشاط</th>
+            <th scope="col">تربيه دينيه</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="text-center"> درجه التلميذ </th>
+            <td>
+              <% const arabicLang = currentStudent.filter(item => item.sub_name == 'اللغه العربيه') %>
+              <%= arabicLang[0].l_term_degree %>
+            </td>
+
+            <td>
+              <% const derasat = currentStudent.filter(item => item.sub_name == 'رياضيات') %>
+              <%= derasat[0].l_term_degree %>
+            </td>
+
+
+
+            <td>
+              <% const english = currentStudent.filter(item => item.sub_name == 'اللغه الانجليزيه') %>
+              <%= english[0].l_term_degree %>
+            </td>
+
+
+
+            <td>??</td>
+            <td>??</td>
+
+            <td>
+              <% const reigion = currentStudent.filter(item => item.sub_name == 'التربيه الدينيه') %>
+              <%= reigion[0].l_term_degree %>
+            </td>
+
+          </tr>
+          <tr>
+            <th class="text-center"> المجموع </th>
+            <td> 100 </td>
+            <td>80</td>
+            <td> 40 </td>
+            <td> 40</td>
+            <td>40</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="final-result">
+        <span> نتيجه الطالب </span> :
+      </div>
+    </div>
+    <div class="colon">
+      <i class="fa fa-scissors" aria-hidden="true"></i>
+      <hr>
+    </div>
+    <% } else { %>
+    <div class="result">
+      <div class="row">
+        <div class="head-result">
+          <div class="col-md-6">
+            <p> <span> المحافظه </span>: <%= dataSchool.city_name %> </p>
+            <p> <span> الاداره </span>: <%= dataSchool.organiztion %> </p>
+            <p> <span> مدرسه </span>: <%= dataSchool.school_name %> </p>
+            <p> <span> أسم الطالب</span>: <%= student.f_name + ' ' + student.l_name %> </p>
+          </div>
+          <div class="col-md-6">
+            <p> نتيجه الترم الاول </p>
+            <p> لعام 2021/2020 </p>
+            <p> <span> رقم الجلوس </span>: <%= student.sitting_no %> </p>
+          </div>
+        </div>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"> الدرجه / الماده </th>
+            <th scope="col">اللغه العربيه</th>
+            <th scope="col">رياضيات</th>
+            <th scope="col">درسات</th>
+            <th scope="col">علوم</th>
+            <th scope="col"> E </th>
+            <th scope="col">نشاط</th>
+            <th scope="col">نشاط</th>
+            <th scope="col">تربيه دينيه</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="text-center"> درجه التلميذ </th>
+            <td>
+              <% const arabicLang = currentStudent.filter(item => item.sub_name == 'اللغه العربيه') %>
+              <%= arabicLang[0].f_term_degree %>
+            </td>
+
+            <td>
+              <% const derasat = currentStudent.filter(item => item.sub_name == 'التربيه الدينيه') %>
+              <%= derasat[0].f_term_degree %>
+            </td>
+
+            <td>
+              <% const math = currentStudent.filter(item => item.sub_name == 'رياضيات') %>
+              <%= math[0].f_term_degree %>
+            </td>
+
+
+            <td>
+              <% const science = currentStudent.filter(item => item.sub_name == 'علوم') %>
+              <%= science[0].f_term_degree %>
+            </td>
+
+
+            <td>
+              <% const english = currentStudent.filter(item => item.sub_name == 'اللغه الانجليزيه') %>
+              <%= english[0].f_term_degree %>
+            </td>
+
+
+
+            <td>??</td>
+            <td>??</td>
+
+            <td>
+              <% const reigion = currentStudent.filter(item => item.sub_name == 'التربيه الدينيه') %>
+              <%= reigion[0].f_term_degree %>
+            </td>
+
+          </tr>
+          <tr>
+            <th class="text-center"> المجموع </th>
+            <td> 100 </td>
+            <td>80</td>
+            <td> 40 </td>
+            <td> 40</td>
+            <td>40</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <div class="final-result">
+        <span> نتيجه الطالب </span> :
+      </div> -->
+    </div>
+    <div class="colon">
+      <i class="fa fa-scissors" aria-hidden="true"></i>
+      <hr>
+    </div>
+    <% } %>
+
+
+    <% } %>
+
+
+  </div>
+</body>
+
+</html>

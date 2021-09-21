@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../parts/head") %>
+
+<body dir="rtl">
+
+    <%- include("../parts/side-bar") %>
+
+
+
+  <div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+      <h4 class="text-center text-capitalize main-title"> مدرسه <%= SchoolName %> </h4>
+    <div class="row">
+      <ol class="breadcrumb">
+        <li><a href="#">
+            <em class="fa fa-home"></em>
+          </a></li>
+        <li class=""> المعلمين </li>
+        <li class="active">أضافه معبم جديد</li>
+      </ol>
+    </div>
+    <!--/.row-->
+
+    <div class="body">
+
+      <div class="data-student">
+
+        <% if(student) { %>
+        <h3 class="text-center"> بيانات المعلم </h3>
+        <div class="row">
+          <div class="col-md-3">
+              <img src="/image/teachers/<%= student.image %>" class="img-responsive">
+          </div>
+          <div class="col-md-9">
+            <ul class="list-unstyled">
+              <li> <span> الرقم القومي </span> : <%= student.ssn %> </li>
+              <li> <span> كود المعلم </span> : <%= student.teach_id %> </li>
+              <li> <span> الاسم بالكامل </span> : <%= student.teach_name %> </li>
+              <li> <span> العنوان </span> : <%= student.address %> </li>
+              <li> <span> الجنسيه </span> : <%= student.natainality %> </li>
+              <li> <span> النوع </span> : <%= student.sex ? 'ذكر' : 'أنثى' %> </li>
+              <li> <span> تاريخ الميلاد </span> : <%= student.b_date %> </li>
+              <li> <span> رقم الوالد </span> : <%= student.phone_no %> </li>
+              <li> <span> رقم البيت </span> : <%= student.phone_no2 %> </li>
+              <li> <span> الشهاده </span> : <%= student.certificates %> </li>
+              <li> <span> تاريخ النخرج </span> : <%= student.graduation_date %> </li>
+              <li> <span> تاريخ التعيين </span> : <%= student.hiring_date %> </li>
+              <li> <span>  التخصص </span> : <%= student.specialazition %> </li>
+              <li> <span>  ماده التدريس </span> : <%= student.teaching_subj %> </li>
+            </ul>
+          </div>
+            <form method="POST" action="/teacher/delete/<%= student.teach_id %>">
+              <input type="hidden" name="image" value="<%= student.image %>">
+              <input type="hidden" name="ssn" value="<%= student.ssn %>">
+              <button type="submit" class="btn btn-danger">
+                حذف الطالب
+              </button>
+            </form>
+        </div>
+        <% } else {  %>
+        <div class="alert alert-danger text-center"> there are not any students </div>
+        <%}%>
+        </div>
+
+    </div>
+
+  </div>
+  <!--/.main-->
+</body>
+
+</html>

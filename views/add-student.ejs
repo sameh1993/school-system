@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<%- include("parts/head") %>
+
+<body dir="rtl">
+
+	<!-- start side bar  -->
+	<%- include("parts/side-bar")%>
+	<!--/.sidebar-->
+
+	<div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+		<h4 class="text-center text-capitalize main-title"> مدرسه السلام المشتركه ف 2 </h4>
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+						<em class="fa fa-home"></em>
+					</a></li>
+				<li class="">الطلاب</li>
+				<li class="active">أضافه طالب جديد</li>
+			</ol>
+		</div>
+		<!--/.row-->
+
+		<div class="container-form">
+				<form action="/student/add" method="POST" enctype="multipart/form-data" >
+					<div class="row">
+	
+						<div class="image-container">
+							<div class="content">
+								<img accept=".png, .jpg, .jpeg" src="/image/default-user-image.png" class="tagImage">
+								<input type="file" name="image" value="/image/default-user-image.png" class="image">
+								<i class="fa fa-plus-circle" aria-hidden="true"></i>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="f_name"> أسم الطالب </label>
+								<input class="form-control" type="text" placeholder="ادخل اسم الطالب" name="f_name"
+									id="f_name">
+							</div>
+							<% let firstName = errorValidator.find(err => err.param == 'f_name') %>
+							<% if(firstName) { %>
+								<p class="alert alert-danger error"> <%= firstName.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="l_name"> أسم الوالد </label>
+								<input class="form-control" type="text" placeholder="ادخل اسم الوالد" name="l_name"
+									id="l_name">
+							</div>
+							<% let lastName = errorValidator.find(err => err.param == 'l_name') %>
+							<% if(lastName) { %>
+								<p class="alert alert-danger error"> <%= lastName.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-4">
+							<div class="form-group relative">
+								<label for=""> الجنسيه </label>
+								<select class="form-control" name="nationality" id="">
+									<option value="" selected> أخنر من القائمه </option>
+									<option value="مصرى"> مصرى </option>
+									<option value="غير مصرى"> غير مصرى </option>
+								</select>
+								<i class="fa fa-angle-down"></i>
+							</div>
+							<% let nationality = errorValidator.find(err => err.param == 'nationality') %>
+							<% if(nationality) { %>
+								<p class="alert alert-danger error"> <%= nationality.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-4">
+							<div class="form-group relative">
+								<label for="f_name"> النوع </label>
+								<select class="form-control" name="sex" id="">
+									<option value="" selected> أختر من القائمه </option>
+									<option value='1' > ذكر </option>
+									<option value='0' > أنثى </option>
+								</select>
+								<i class="fa fa-angle-down"></i>
+							</div>
+							<% let sex = errorValidator.find(err => err.param == 'sex') %>
+							<% if(sex) { %>
+								<p class="alert alert-danger error"> <%= sex.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-4">
+							<div class="form-group relative">
+								<label for="f_name"> الديانه </label>
+								<select class="form-control" name="religion">
+									<option value="" selected> أختر من القائمه </option>
+									<option value="مسلم"> مسلم </option>
+									<option value="غير مسلم"> غير مسلم </option>
+								</select>
+								<i class="fa fa-angle-down"></i>
+							</div>
+							<% let religion = errorValidator.find(err => err.param == 'religion') %>
+							<% if(religion) { %>
+								<p class="alert alert-danger error"> <%= religion.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date"> كود الطالب </label>
+								<input class="form-control" dir="rtl" type="text"
+									placeholder="ادخل كود الطالب" name="student_id">
+							</div>
+							<% let student_id = errorValidator.find(err => err.param == 'student_id') %>
+							<% if(student_id) { %>
+								<p class="alert alert-danger error"> <%= student_id.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date"> الرقم القومي </label>
+								<input class="form-control" class="form-control" type="text" placeholder="ادخل الرقم القومي"
+									name="ssn">
+							</div>
+							<% let ssn = errorValidator.find(err => err.param == 'ssn') %>
+							<% if(ssn) { %>
+								<p class="alert alert-danger error"> <%= ssn.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date"> تاريخ الميلاد </label>
+								<input class="form-control text-right date" dir="rtl" type="date"
+									placeholder="ادخل تاريخ الميلاد" name="b_date">
+							</div>
+							<% let b_date = errorValidator.find(err => err.param == 'ssn') %>
+							<% if(b_date) { %>
+								<p class="alert alert-danger error"> <%= b_date.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="address">  ألعنوان </label>
+								<input class="form-control" class="form-control" type="text"
+									placeholder="ادخل محافظه الميلاد" name="address">
+							</div>
+							<% let address = errorValidator.find(err => err.param == 'address') %>
+							<% if(address) { %>
+								<p class="alert alert-danger error"> <%= address.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date"> محافظه الميلاد </label>
+								<input class="form-control" class="form-control" type="text"
+									placeholder="ادخل محافظه الميلاد" name="birth_place">
+							</div>
+							<% let birth_place = errorValidator.find(err => err.param == 'birth_place') %>
+							<% if(birth_place) { %>
+								<p class="alert alert-danger error"> <%= birth_place.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date"> اسم الام </label>
+								<input autocomplete="off" class="form-control" class="form-control" type="text" placeholder="ادخل اسم الام"
+									name="mom_name">
+							</div>
+							<% let mom_name = errorValidator.find(err => err.param == 'mom_name') %>
+							<% if(mom_name) { %>
+								<p class="alert alert-danger error"> <%= mom_name.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date">رقم المنزل </label>
+								<input class="form-control" class="form-control" type="text" placeholder="ادخل رقم المنزل"
+									name="home_no">
+							</div>
+							<% let home_no = errorValidator.find(err => err.param == 'home_no') %>
+							<% if(home_no) { %>
+								<p class="alert alert-danger error"> <%= home_no.msg %> </p>
+							<% } %>
+						</div>
+	
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date"> رقم المحمول </label>
+								<input class="form-control" class="form-control" type="text" placeholder="ادخل رقم الاب"
+									name="parent_no">
+							</div>
+						</div>
+						<% let parent_no = errorValidator.find(err => err.param == 'parent_no') %>
+						<% if(parent_no) { %>
+							<p class="alert alert-danger error"> <%= parent_no.msg %> </p>
+						<% } %>
+	
+						<div class="col-md-12">
+							
+						<h4 class="text-center"> البيانات التعليميه </h4>
+						
+						<div class="col-md-6">
+							<div class="form-group relative">
+								<label for="b_date"> الصف </label>
+								<select class="form-control" id="level" name="level">
+									<option value="" selected> أخنر من القائمه </option>
+	
+									<% for(let level of levels) {  %>
+										<option value="<%= level.level_id %>"> <%= level.level_name %> </option>
+									<% } %>
+								</select>
+								<i class="fa fa-angle-down"></i>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group relative">
+								<label for="b_date"> الفصل </label>
+								<select class="form-control" id="class" name="class">
+									<option value="" selected> أخنر من القائمه </option>
+								</select>
+								<i class="fa fa-angle-down"></i>
+							</div>
+						</div>
+	
+						
+	
+						<div class="col-md-12">
+							<div class="form-group relative">
+								<label for="f_name"> حاله القيد </label>
+								<select class="form-control" name="student_status">
+									<option value="" selected> أخنر من القائمه </option>
+									<option value="مستجد"> مستجد </option>
+									<option value="ناجح و منقول"> ناجح ومنقول </option>
+									<option value="عايد"> عايد </option>
+								</select>
+								<i class="fa fa-angle-down"></i>
+							</div>
+						</div>
+						</div>
+						<div class="clearfix"></div>
+						<input type="submit" value="ارسال" class="btn btn-primary d-block ml-auto mr-auto" />
+	
+					</div>
+				</form>
+		</div>
+
+	</div>
+	<!--/.main-->
+
+	
+
+	<script src="/js/jquery-1.11.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/chart.min.js"></script>
+	<script src="/js/chart-data.js"></script>
+	<script src="/js/easypiechart.js"></script>
+	<script src="/js/easypiechart-data.js"></script>
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script src="/js/custom.js"></script>
+	<script>
+		var test = '<%- JSON.stringify(classList) %>';
+		const classList = JSON.parse(test)
+		$("#level").change(function() {
+			$("#class").html("<option selected> 1 أختر من القائمه </option>")
+			for(let i=0; i < classList.length; i++) {
+				if(classList[i].level_id == $(this).val()) {
+					$("#class").append(`<option value="${classList[i].id}" > ${classList[i].class_name} </option>`)
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>

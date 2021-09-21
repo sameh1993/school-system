@@ -1,0 +1,30 @@
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<div class="profile-sidebar">
+				<div class="profile-userpic">
+						<img src="<%= currentUser ? '/image/teachers/' + currentUser.image : '../image/default-user-image.png' %>" class="img-responsive" alt="">
+						<div class="profile-usertitle-status"><span class="indicator label-success"></span></div>
+					</div>
+			
+			<div class="profile-usertitle">
+				<% if(currentUser) {  %>
+					<div class="profile-usertitle-name"> <%= currentUser.name %> </div>
+					<% } %>
+			</div>
+			
+			<div class="clear"></div>
+		</div>
+		<div class="divider"></div>
+		<% if(controlLevel === 'admin') { %>
+			<button class="btn bg-light mr-auto ml-auto d-block text-white mt-2" type="button" >
+				<a href="/auth/register"> Add User </a>
+			</button>
+			<% } %>
+		<ul class="nav menu">
+			<li class="<%= activeTab == 'home'? 'active' : '' %>"><a href="/"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li class="<%= activeTab == 'teacher'? 'active' : '' %>"><a href="/teacher"><em class="fa fa-bar-chart">&nbsp;</em> المدرسين</a></li>
+			<li class="<%= activeTab == 'student'? 'active' : '' %>"><a href="/student"><em class="fa fa-calendar">&nbsp;</em> الطلاب</a></li>
+			<li class="<%= activeTab == 'class'? 'active' : '' %>"><a href="/class"><em class="fa fa-calendar">&nbsp;</em> الفصول </a></li>
+			<li class="<%= activeTab == 'exam'? 'active' : '' %>"><a href="/exam"><em class="fa fa-toggle-off">&nbsp;</em> النتيجه</a></li>
+			<li ><a href="/auth/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+		</ul>
+	</div>

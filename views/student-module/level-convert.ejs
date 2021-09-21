@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../parts/head") %>
+
+<body dir="rtl">
+
+  <!-- start side bar  -->
+  <%- include("../parts/side-bar")%>
+  <!--/.sidebar-->
+
+
+
+  <div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+    <h4 class="text-center text-capitalize main-title"> <%= SchoolName %> </h4>
+    <div class="row">
+      <ol class="breadcrumb">
+        <li><a href="#">
+            <em class="fa fa-home"></em>
+          </a></li>
+        <li class="">الطلاب</li>
+        <li class="active"> تحويل طالب من صف لاخر </li>
+      </ol>
+    </div>
+    <!--/.row-->
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col"> الرقم القومي </th>
+          <th scope="col">الاسم بالكامل</th>
+          <th scope="col"> الصف </th>
+          <th scope="col"> الفصل </th>
+          <th scope="col"> # </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (dataStudent) {  %>
+        <% for(let student of dataStudent) {  %>
+        <tr>
+          <td> <%= student.ssn %> </td>
+          <input type="hidden" value="<%= student.ssn %>" class="ssn" />
+          <td> <a href="/student/<%= student.ssn %>"> <%= student.f_name + ' ' + student.l_name %> </a> </td>
+          <td>
+            <select class="form-control level" id="level" name="level">
+              <option value="" selected> أخنر من القائمه </option>
+
+              <% for(let level of levelList) {  %>
+              <option value="<%= level.level_id %>"> <%= level.level_name %> </option>
+              <% } %>
+            </select>
+          </td>
+          <td>
+            <select class="form-control class" id="class" name="class">
+              <option value="" selected> أخنر من القائمه </option>
+            </select>
+          </td>
+
+          <td>
+            <button type="button" class="btn btn-info">
+              Edit
+            </button>
+          </td>
+          <!-- <td>
+                <form method="POST" action="/student/delete" >
+                  <input type="hidden" name="image" value="<%= student.image %>">
+                  <input type="hidden" name="ssn" value="<%= student.ssn %>">
+                  <button type="submit">
+                      <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </td> -->
+
+        </tr>
+        <% } %>
+        <% } else { %>
+        <div class="alert alert-danger"> there are not any students </div>
+        <% } %>
+
+      </tbody>
+    </table>
+
+  </div>
+  <!--/.main-->
+
+
+
+  <!-- start scripts for js files-->
+  <script src="/js/jquery-1.11.1.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/axios/dist/axios.min.js"></script>
+  <script src="/js/custom.js"></script>
+  <script>
+    var test = '<%- JSON.stringify(classList) %>';
+    const classList = JSON.parse(test)
+    $("#level").change(function () {
+      $("#class").html("<option selected> أختر من القائمه </option>")
+      for (let i = 0; i < classList.length; i++) {
+        if (classList[i].level_id == $(this).val()) {
+          $("#class").append(`<option value="${classList[i].id}" > ${classList[i].class_name} </option>`)
+        }
+      }
+    })
+
+    $(".btn.btn-info").click(function () {
+      const parent = $(this).parents("tr")
+      const studentData = {
+        ssn: parent.find('.ssn').val(),
+        level: parent.find(".level").val(),
+        class: parent.find(".class").val()
+      }
+      axios.post("/student/convert-level", studentData).then(resault => {
+        res.json(resault)
+      }).catch(err => {
+        console.log(err)
+      })
+    })
+  </script>
+</body>
+
+</html>

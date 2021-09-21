@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<%- include("../parts/head") %>
+
+<body dir="rtl">
+
+	<!-- start side bar  -->
+	<%- include("../parts/side-bar")%>
+	<!--/.sidebar-->
+
+	<div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+		<h4 class="text-center text-capitalize main-title"> مدرسه <%= schoolName %> </h4>
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+						<em class="fa fa-home"></em>
+					</a></li>
+				<li class="">المعلمين</li>
+				<li class="active">أضافه معلم جديد</li>
+			</ol>
+		</div>
+		<!--/.row-->
+
+		<div class="container-form">
+			<form action="/teacher/add" method="POST" enctype="multipart/form-data">
+				<div class="row">
+
+					<div class="image-container">
+						<div class="content">
+							<img accept=".png, .jpg, .jpeg" src="/image/default-user-image.png" class="tagImage">
+							<input type="file" name="image" value="/image/default-user-image.png" class="image">
+							<i class="fa fa-plus-circle" aria-hidden="true"></i>
+						</div>
+					</div>
+
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date"> كود المعلم </label>
+							<input class="form-control" dir="rtl" type="text" placeholder="ادخل كود المعلم"
+								name="teach_id">
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date"> الرقم القومي </label>
+							<input class="form-control" class="form-control" type="text" placeholder="ادخل الرقم القومي"
+								name="ssn">
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="f_name"> اسم المعلم </label>
+							<input class="form-control" type="text" placeholder="ادخل اسم المعلم" name="teach_name"
+								id="teach_name">
+						</div>
+					</div>
+
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for=""> العنوان </label>
+							<input class="form-control" class="form-control" type="text"
+								placeholder="ادخل محافظه الميلاد" name="address">
+						</div>
+					</div>
+
+
+					<div class="col-md-4">
+						<div class="form-group relative">
+							<label for=""> الجنسيه </label>
+							<select class="form-control" name="nationality" id="">
+								<option value="" selected> أخنر من القائمه </option>
+								<option value="مصرى"> مصرى </option>
+								<option value="غير مصرى"> غير مصرى </option>
+							</select>
+							<i class="fa fa-angle-down"></i>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group relative">
+							<label for="f_name"> النوع </label>
+							<select class="form-control" name="sex" id="">
+								<option value="" selected> أختر من القائمه </option>
+								<option value='1'> ذكر </option>
+								<option value='0'> أنثى </option>
+							</select>
+							<i class="fa fa-angle-down"></i>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group relative">
+							<label for="f_name"> الديانه </label>
+							<select class="form-control" name="religion">
+								<option value="" selected> أختر من القائمه </option>
+								<option value="مسلم"> مسلم </option>
+								<option value="غير مسلم"> غير مسلم </option>
+							</select>
+							<i class="fa fa-angle-down"></i>
+						</div>
+					</div>
+
+
+
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date"> تاريخ الميلاد </label>
+							<input class="form-control text-right" dir="rtl" type="date" placeholder="dd/mm/yyyy"
+								name="b_date">
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date"> محافظه الميلاد </label>
+							<input class="form-control" class="form-control" type="text"
+								placeholder="ادخل محافظه الميلاد" name="birth_place">
+						</div>
+					</div>
+
+
+
+
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date">رقم المنزل </label>
+							<input class="form-control" class="form-control" type="text" placeholder="ادخل رقم المنزل"
+								name="phone_no">
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date"> رقم المحمول </label>
+							<input class="form-control" class="form-control" type="text" placeholder="ادخل رقم المحمول"
+								name="phone_no2">
+						</div>
+					</div>
+
+					<div class="col-md-12">
+
+						<h4 class="text-center"> البيانات الوظيفيه </h4>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date"> التخصص </label>
+								<input class="form-control text-right" dir="rtl" type="text" placeholder="ادخل التخصص"
+									name="specialazition">
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date"> المؤهل الدراسى </label>
+								<input class="form-control" class="form-control" type="text"
+									placeholder="ادخل المؤاهل الدراسى" name="certificate">
+							</div>
+						</div>
+
+						<div class="col-md-6">
+								<div class="form-group">
+									<label for="b_date"> ماده التدريس </label>
+									<input class="form-control" class="form-control" type="text"
+										placeholder="ادخل ماده التدريس" name="teaching_subj">
+								</div>
+							</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date"> تاريخ التخرج </label>
+								<input class="form-control text-right" dir="rtl" type="date" placeholder="dd/mm/yyyy"
+									name="grad_date">
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="b_date"> تاريخ التعيين </label>
+								<input class="form-control text-right" class="form-control" type="date"
+									placeholder="ادخل تاريخ التعيين" name="hiring_date">
+							</div>
+						</div>
+
+
+
+
+					</div>
+					<div class="clearfix"></div>
+					<input type="submit" value="ارسال" class="btn btn-primary d-block ml-auto mr-auto" />
+
+				</div>
+			</form>
+		</div>
+
+	</div>
+	<!--/.main-->
+
+
+
+	<script src="/js/jquery-1.11.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/chart.min.js"></script>
+	<script src="/js/chart-data.js"></script>
+	<script src="/js/easypiechart.js"></script>
+	<script src="/js/easypiechart-data.js"></script>
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script src="/js/custom.js"></script>
+
+</body>
+
+</html>

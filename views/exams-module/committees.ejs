@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../parts/head') %>
+<body dir="rtl">
+    
+  <div class="container">
+        <!-- start committees -->
+    <ul class="config list-unstyled">
+        <div> <span> المحافظه </span> : <%= config.city_name %> </div>
+        <div> <span> الاداره </span> : <%= config.organiztion %> </div>
+        <div> <span> المدرسه </span> : <%= config.school_name %> </div>
+    </ul>
+    <table class="table table-striped" style="width: 50%">
+        <thead>
+          <tr>
+            <th scope="col"> م</th>
+            <th scope="col">الاسم بالكامل</th>
+            <th scope="col">رقم الجلوس</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <% for(let i=0; i < committees.length; i++ ) { %>
+            <tr>
+                <th class="text-center"> <%= i + 1 %></th>
+                <td> <a href="/student/<%= committees[i].ssn %>"> <%=  committees[i].fullname %> </a> </td>
+                <td> <%= committees[i].sitting_no %> </td>
+            </tr>
+          <% } %>
+  
+        </tbody>
+      </table>
+
+    <!-- end committees -->
+  </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+/***** start glocal reules ***/
+
+.ml-auto {
+    margin-left: auto !important;
+}
+
+.mr-auto {
+    margin-right: auto !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.form-group .alert.alert-danger {
+    font-size: 12px;
+    padding: 4px;
+}
+
+.form-group {
+    margin-bottom: 7px;
+}
+
+.alert {
+    margin-bottom: 4px;
+}
+
+
+
+/***** end glocal reules ***/
+
+/** start sidebar-collapse **/
+
+.sidebar .bg-light {
+    margin-top: 15px;
+}
+
+
+/** end sidebar-collapse **/
+
+/*** start result page ***/
+
+.result .row {
+    margin: 0 !important;
+}
+
+.result .head-result {
+    font-size: 13px;
+}
+
+.result .head-result > div {
+    width: 50% !important;
+}
+
+.result .head-result p span {
+    width: 57px;
+    display:inline-block;
+    font-weight: 600;
+}
+
+.result table {
+    margin-top: 3px !important;
+    border-radius: 4px;
+
+}
+
+.result .final-result{
+    padding: 10px 15px;
+}
+
+.result .final-result span {
+    font-weight: 600;
+    display:inline-block;
+    width: 80px;
+}
+.colon hr {
+    border-top: 1px dotted #777 !important;
+    display:inline-block;
+    width:96%;
+}
+
+.colon i {
+    transform: rotateY(
+        180deg
+        ) translateY(-14px);
+            font-size: 24px;
+}
+
+
+/*** end result page ***/

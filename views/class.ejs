@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("parts/head") %>
+
+<body dir="rtl">
+
+    <!-- start side bar  -->
+    <%- include("parts/side-bar")%>
+    <!--/.sidebar-->
+
+    <!-- start main section -->
+    <div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+		<h4 class="text-center text-capitalize main-title"> مدرسه <%= SchoolName %> </h4>
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+						<em class="fa fa-home"></em>
+					</a></li>
+				<li class="active"> المعلمين </li>
+			</ol>
+		</div>
+		<!--/.row-->
+
+		<div class="querys">
+
+			<ul class="list-unstyled links">
+				<li data-show="teacherList-form" class="view"> قائمه الفصول </li>
+			</ul>
+		</div>
+
+
+	</div>
+	<!--/.main section-->
+
+
+	<!-- start forms -->
+	<div class="fixed teacherList-form">
+		<i class="fa fa-window-close"></i>
+		<form action="/class/class-list" method="GET" class="form">
+
+			<div class="form-group">
+				<label> اسم الفصــل  </label>
+				<select class="form-control" type="text" placeholder="أدخل اســم الفصـــل" name="classId">
+                    <option selected> اختر من القائمه </option>
+                    <% for(let element of classList) {  %>
+                        <option value="<%= element.id %>"> <%= element.id + " "  +  element.class_name %> </option>
+                    <% } %>
+                </select>
+			</div>
+
+			<button type="submit" class="btn btn-primary"> أرسال </button>
+		</form>
+	</div>
+
+
+
+
+    <!-- start scripts for js files   -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/custom.js"></script>
+</body>
+
+</html>

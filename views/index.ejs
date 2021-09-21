@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<%- include("parts/head") %>
+
+<body dir="rtl">
+
+	<!-- start side bar  -->
+	<%- include("parts/side-bar")%>
+	<!--/.sidebar-->
+
+	<div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+		<h4 class="text-center text-capitalize main-title"> مدرسه <%= schoolName %> </h4>
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+						<em class="fa fa-home"></em>
+					</a></li>
+				<li class="active">Dashboard</li>
+			</ol>
+		</div>
+		<!--/.row-->
+
+		<div class="panel panel-container dash-body">
+			<div class="row text-center">
+				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+					<div class="panel panel-teal panel-widget ">
+						<div class="row no-padding"><em class="fa fa-xl fa-graduation-cap color-blue"></em>
+							<div class="large"> <%= students.length %> </div>
+							<div class="text-muted"> عدد الطلاب </div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+					<div class="panel panel-blue panel-widget border-right">
+						<div class="row no-padding"><em class="fa fa-xl fa-comments color-orange"></em>
+							<div class="large">52</div>
+							<div class="text-muted"> عدد المدرسين </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+					<div class="panel panel-blue panel-widget border-right">
+						<div class="row no-padding"><i class="fa fa-graduation-cap" aria-hidden="true"></i></em>
+							<div class="large">52</div>
+							<div class="text-muted"> teachers </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+					<div class="panel panel-blue panel-widget border-right">
+						<div class="row no-padding"><em class="fa fa-xl fa-comments color-orange"></em>
+							<div class="large">52</div>
+							<div class="text-muted"> teachers </div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!--/.row-->
+		</div>
+
+		<% var studentLevelOne = students.filter(item => item.level_id == 1) %>
+		<% var leveOneSexOne = studentLevelOne.filter(item => item.sex == 1) %>
+		<% var leveOneSexZero = studentLevelOne.filter(item => item.sex == 0) %>
+		<div class="row rows">
+			<div class="col-12">
+				<div class="item col-sm-6">
+					<h3 class="text-center bg-white"> الصف الاول </h3>
+					<div class="row">
+
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنين </h4>
+									<div class="easypiechart easypiechart-blue" data-percent="<%= ( +leveOneSexOne.length * 100 ) / +studentLevelOne.length %>"><span
+											class="percent"> <%= Math.floor(( +leveOneSexOne.length * 100 ) / +studentLevelOne.length)  + '%' %> </span></div>
+								</div>
+								<p class="text-center"> <%= leveOneSexOne.length %> طالب </p>
+
+							</div>
+
+						</div>
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنات </h4>
+									<div class="easypiechart easypiechart-orange" data-percent="<%= ( +leveOneSexZero.length * 100 ) / +studentLevelOne.length %>"><span
+										class="percent"> <%= Math.floor(( +leveOneSexZero.length * 100 ) / +studentLevelOne.length)  + '%' %> </span></div>
+								</div>
+								<p class="text-center"> <%= leveOneSexZero.length %> طالبه </p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<% var studentLevelTwo = students.filter(item => item.level_id == 2) %>
+				<% var leveTwoSexOne = studentLevelTwo.filter(item => item.sex == 1) %>
+				<% var leveTwoSexZero = studentLevelTwo.filter(item => item.sex == 0) %>
+				<div class="item col-sm-6">
+					<h3 class="text-center bg-white"> الصف الثانى </h3>
+					<div class="row">
+
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنين </h4>
+									<div class="easypiechart easypiechart-orange" data-percent="<%= ( +leveTwoSexOne.length * 100 ) / +studentLevelTwo.length %>"><span
+										class="percent"> <%= Math.floor(( +leveTwoSexOne.length * 100 ) / +studentLevelTwo.length)  + '%' %> </span></div>
+								</div>
+								<p class="text-center"> <%= leveTwoSexOne.length %> طالب </p>
+							</div>
+						</div>
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنات </h4>
+									<div class="easypiechart easypiechart-teal" data-percent="<%= ( +leveTwoSexZero.length * 100 ) / +studentLevelTwo.length %>"><span
+										class="percent"> <%= Math.floor(( +leveTwoSexZero.length * 100 ) / +studentLevelTwo.length)  + '%' %> </span></div>
+								</div>
+								<p class="text-center"> <%= leveTwoSexZero.length %> طالبه </p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<% var studentLevelThree = students.filter(item => item.level_id == 3) %>
+				<% var leveThreeSexOne = studentLevelThree.filter(item => item.sex == 1) %>
+				<% var leveThreeSexZero = studentLevelThree.filter(item => item.sex == 0) %>
+				<div class="item col-sm-6">
+					<h3 class="text-center bg-white"> الصف الثالث </h3>
+					<div class="row">
+
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنين </h4>
+									<div class="easypiechart easypiechart-teal" data-percent="<%= ( +leveThreeSexOne.length * 100 ) / +studentLevelThree.length %>"><span
+										class="percent"> <%= Math.floor((+leveThreeSexOne.length * 100 ) / +studentLevelThree.length)  + '%' %> </span></div>
+			
+								</div>
+								<p class="text-center"> <%= leveThreeSexOne.length %> طالب </p>
+							</div>
+						</div>
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنات </h4>
+									<div class="easypiechart easypiechart-blue" data-percent="<%= ( +leveThreeSexZero.length * 100 ) / +studentLevelThree.length %>"><span
+										class="percent"> <%= Math.floor(( +leveThreeSexZero.length * 100 ) / +studentLevelThree.length)  + '%' %> </span></div>
+
+								</div>
+								<p class="text-center"> <%= leveThreeSexZero.length %> طالبه </p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<% var studentLevelFour = students.filter(item => item.level_id == 4) %>
+				<% var levelFourSexOne = studentLevelFour.filter(item => item.sex == 1) %>
+				<% var leveFourSexZero = studentLevelFour.filter(item => item.sex == 0) %>
+				<div class="item col-sm-6">
+					<h3 class="text-center bg-white"> الصف الرابع </h3>
+					<div class="row">
+
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنين </h4>
+									<div class="easypiechart easypiechart-red" data-percent="<%= ( +levelFourSexOne.length * 100 ) / +studentLevelFour.length %>"><span
+										class="percent"> <%= Math.floor(( +levelFourSexOne.length * 100 ) / +studentLevelFour.length)  + '%' %> </span></div>
+								</div>
+								<p class="text-center"> <%= levelFourSexOne.length %> طالب </p>
+
+							</div>
+						</div>
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنات </h4>
+									<div class="easypiechart easypiechart-orange" data-percent="<%= ( +leveFourSexZero.length * 100 ) / +studentLevelFour.length %>"><span
+										class="percent"> <%= Math.floor(( +leveFourSexZero.length * 100 ) / +studentLevelFour.length)  + '%' %> </span></div>
+								</div>
+								<p class="text-center"> <%= leveFourSexZero.length %> طالبه </p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<% var studentLevelFive = students.filter(item => item.level_id == 5) %>
+				<% var levelFiveSexOne = studentLevelFive.filter(item => item.sex == 1) %>
+				<% var leveFiveSexZero = studentLevelFive.filter(item => item.sex == 0) %>
+				<div class="item col-sm-6">
+					<h3 class="text-center bg-white"> الصف الخامس </h3>
+					<div class="row">
+
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنين </h4>
+									<div class="easypiechart easypiechart-blue" data-percent="<%= ( +levelFiveSexOne.length * 100 ) / +studentLevelFive.length %>"><span
+										class="percent"> <%= Math.floor(( +levelFiveSexOne.length * 100 ) / +studentLevelFive.length)  + '%' %> </span></div>
+								</div>
+								<p class="text-center"> <%= levelFiveSexOne.length %> طالب </p>
+							</div>
+						</div>
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنات </h4>
+									<div class="easypiechart easypiechart-orange" data-percent="<%= ( +leveFiveSexZero.length * 100 ) / +studentLevelFive.length %> "><span
+										class="percent"> <%= Math.floor(( +leveFiveSexZero.length * 100 ) / +studentLevelFive.length)  + '%' %> </span></div>
+								</div>
+								<p class="text-center"> <%= leveFiveSexZero.length %> طالبه </p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<% var studentLevelSex = students.filter(item => item.level_id == 6) %>
+				<% var levelSexSexOne = studentLevelSex.filter(item => item.sex == 1) %>
+				<% var levelSexSexZero = studentLevelSex.filter(item => item.sex == 0) %>
+				<div class="item col-sm-6">
+					<h3 class="text-center bg-white"> الصف السادس </h3>
+					<div class="row">
+
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنين </h4>
+									<div class="easypiechart easypiechart-orange" data-percent="<%= ( +levelSexSexOne.length * 100 ) / +studentLevelSex.length %>"><span
+										class="percent"> <%= Math.floor(( +levelSexSexOne.length * 100 ) / +studentLevelSex.length)  + '%' %> </span></div>
+								</div>
+								<p class="text-center"> <%= levelSexSexOne.length %> طالب </p>
+							</div>
+						</div>
+						<div class="col-xs-6 col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-body easypiechart-panel">
+									<h4> نسبه البنات </h4>
+									<div class="easypiechart easypiechart-teal" data-percent="<%= ( +levelSexSexZero.length * 100 ) / +studentLevelSex.length %>"><span
+										class="percent"> <%= Math.floor(( +levelSexSexZero.length * 100 ) / +studentLevelSex.length)  + '%' %> </span></div>
+								</div>
+								<p class="text-center"> <%= levelSexSexZero.length %> طالبه </p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!--/.row-->
+
+
+	</div>
+	<!--/.main-->
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/custom.js"></script>
+	<script>
+		window.onload = function () {
+			var chart1 = document.getElementById("line-chart").getContext("2d");
+			window.myLine = new Chart(chart1).Line(lineChartData, {
+				responsive: true,
+				scaleLineColor: "rgba(0,0,0,.2)",
+				scaleGridLineColor: "rgba(0,0,0,.05)",
+				scaleFontColor: "#c5c7cc"
+			});
+		};
+	</script>
+
+</body>
+
+</html>
