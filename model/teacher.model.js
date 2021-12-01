@@ -1,6 +1,17 @@
 const db = require("../model/db").db
 
 
+exports.getAllTeachers = () => {
+    return new Promise((resolve, reject) => {
+        db("select teach_id, teach_name, teaching_subj from teachers").then(result => {
+            resolve(result)
+        }).catch(err => {
+            reject(err)
+        })
+    })
+}
+
+
 exports.getTeacherById = (data) => {
 
     return new Promise((resolve, reject) => {
@@ -22,6 +33,7 @@ exports.getTeacherByName = (data) => {
     })
 }
 
+
 exports.addNewTeacher = (data, image) => {
     return new Promise((resolve, reject) => {
         db(`insert into teachers 
@@ -33,6 +45,18 @@ exports.addNewTeacher = (data, image) => {
         })  
     })
 }
+
+
+// exports.getTeacherSchedule = (data) => {
+//     // return console.log(data)
+//     return new Promise((resolve, reject) => {
+//         db(`select section_name, day_id, (select sub_name from subjects where id = subject_id) as sub_name from class_schedule join class_teacher clt on id = subject_teacher_id where teacher_id = 32162 and clt.class_id = 1`).then(result => {
+//             resolve(result)
+//         }).catch(err => {
+//             reject(err)
+//         })
+//     })
+// }
 
 exports.deleteTeacherById = (data) => {
     console.log(data)

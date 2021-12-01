@@ -9,17 +9,21 @@
 	<%- include("../parts/side-bar")%>
 	<!--/.sidebar-->
 
-	<div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+	<div class="dashboard mb-4 col-sm-9 col-lg-10 main">
 		<h4 class="text-center text-capitalize main-title"> مدرسه <%= schoolName %> </h4>
-		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="#">
-						<em class="fa fa-home"></em>
-					</a></li>
-				<li class="">المعلمين</li>
-				<li class="active">أضافه معلم جديد</li>
-			</ol>
-		</div>
+		<div class="main-row">
+			<div><a href="/">
+					<em class="fa fa-home"></em>
+				</a> / 
+				<p> المعلمين </p>
+				<p class="active"> اضافه معلم جديد </p>
+			</div>
+			<div class="user">
+				<i class="fa fa-user"></i>
+				user
+			</div>
+			</div>
+			
 		<!--/.row-->
 
 		<div class="container-form">
@@ -144,54 +148,50 @@
 						</div>
 					</div>
 
-					<div class="col-md-12">
 
-						<h4 class="text-center"> البيانات الوظيفيه </h4>
+					<h4 class="text-center"> البيانات الوظيفيه </h4>
 
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="b_date"> التخصص </label>
-								<input class="form-control text-right" dir="rtl" type="text" placeholder="ادخل التخصص"
-									name="specialazition">
-							</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date"> التخصص </label>
+							<input class="form-control text-right" dir="rtl" type="text" placeholder="ادخل التخصص"
+								name="specialazition">
 						</div>
-
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="b_date"> المؤهل الدراسى </label>
-								<input class="form-control" class="form-control" type="text"
-									placeholder="ادخل المؤاهل الدراسى" name="certificate">
-							</div>
-						</div>
-
-						<div class="col-md-6">
-								<div class="form-group">
-									<label for="b_date"> ماده التدريس </label>
-									<input class="form-control" class="form-control" type="text"
-										placeholder="ادخل ماده التدريس" name="teaching_subj">
-								</div>
-							</div>
-
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="b_date"> تاريخ التخرج </label>
-								<input class="form-control text-right" dir="rtl" type="date" placeholder="dd/mm/yyyy"
-									name="grad_date">
-							</div>
-						</div>
-
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="b_date"> تاريخ التعيين </label>
-								<input class="form-control text-right" class="form-control" type="date"
-									placeholder="ادخل تاريخ التعيين" name="hiring_date">
-							</div>
-						</div>
-
-
-
-
 					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date"> المؤهل الدراسى </label>
+							<input class="form-control" class="form-control" type="text"
+								placeholder="ادخل المؤاهل الدراسى" name="certificate">
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date"> ماده التدريس </label>
+							<input class="form-control" class="form-control" type="text" placeholder="ادخل ماده التدريس"
+								name="teaching_subj">
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date"> تاريخ التخرج </label>
+							<input class="form-control text-right" dir="rtl" type="date" placeholder="dd/mm/yyyy"
+								name="grad_date">
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="b_date"> تاريخ التعيين </label>
+							<input class="form-control text-right" class="form-control" type="date"
+								placeholder="ادخل تاريخ التعيين" name="hiring_date">
+						</div>
+					</div>
+
+
 					<div class="clearfix"></div>
 					<input type="submit" value="ارسال" class="btn btn-primary d-block ml-auto mr-auto" />
 

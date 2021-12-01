@@ -108,8 +108,17 @@
         level: parent.find(".level").val(),
         class: parent.find(".class").val()
       }
-      axios.post("/student/convert-level", studentData).then(resault => {
-        res.json(resault)
+      axios.post("/student/convert-level", studentData).then(result => {
+        console.log(result)
+        if(result.data.result) {
+          $(".msg").addClass('alert-info').html(result.data.result).fadeIn(300, () =>{
+            $(".msg").delay(1300).fadeOut(300)
+          })
+        } else {
+          $(".msg").addClass('alert-danger').html(result.data.err).fadeIn(300, () =>{
+            $(".msg").delay(1300).fadeOut(300)
+          })
+        }
       }).catch(err => {
         console.log(err)
       })

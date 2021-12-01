@@ -9,7 +9,7 @@
     <!--/.sidebar-->
 
     <!-- start main section -->
-    <div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+    <div class="dashboard mb-4 col-sm-9 col-lg-10 main">
 		<h4 class="text-center text-capitalize main-title"> مدرسه <%= SchoolName %> </h4>
 		<div class="row">
 			<ol class="breadcrumb">
@@ -24,7 +24,9 @@
 		<div class="querys">
 
 			<ul class="list-unstyled links">
-				<li data-show="teacherList-form" class="view"> قائمه الفصول </li>
+				<li data-show="teacherList-form" class="view"> قائمه مدرسين كل فصل </li>
+				<li data-show="section-form" class="view"> جدول الفصل </li>
+				<li data-show="edit-section-form" class="view"> تعديل جدول الفصل</li>
 			</ul>
 		</div>
 
@@ -43,9 +45,47 @@
 				<select class="form-control" type="text" placeholder="أدخل اســم الفصـــل" name="classId">
                     <option selected> اختر من القائمه </option>
                     <% for(let element of classList) {  %>
-                        <option value="<%= element.id %>"> <%= element.id + " "  +  element.class_name %> </option>
+                        <option value="<%= element.id %>"> <%=   element.class_name %> </option>
                     <% } %>
                 </select>
+			</div>
+			<button type="submit" class="btn btn-primary"> أرسال </button>
+		</form>
+	</div>
+
+	<div class="fixed section-form">
+		<i class="fa fa-window-close"></i>
+		<form action="/class/class-schedule" method="GET" class="form">
+
+			<div class="form-group">
+				<label> اسم الفصــل  </label>
+				<select class="form-control" type="text" placeholder="أختار اســم الفصـــل" name="classId">
+                    <option selected> اختر من القائمه </option>
+                    <% for(let element of classList) {  %>
+                        <option value="<%= element.id %>"> <%=  element.class_name %> </option>
+                    <% } %>
+                </select>
+
+			</div>
+
+			<button type="submit" class="btn btn-primary"> أرسال </button>
+		</form>
+	</div>
+
+
+	<div class="fixed edit-section-form">
+		<i class="fa fa-window-close"></i>
+		<form action="/class/edit-class-schedule" method="GET" class="form">
+
+			<div class="form-group">
+				<label> اسم الفصــل  </label>
+				<select class="form-control" type="text" placeholder="أختار اســم الفصـــل" name="classId">
+                    <option selected> اختر من القائمه </option>
+                    <% for(let element of classList) {  %>
+                        <option value="<%= element.id %>"> <%=  element.class_name %> </option>
+                    <% } %>
+                </select>
+
 			</div>
 
 			<button type="submit" class="btn btn-primary"> أرسال </button>

@@ -10,7 +10,7 @@
 
 
     <!-- start main section -->
-    <div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+    <div class="dashboard mb-4 col-sm-9 col-lg-10 main">
         <h4 class="text-center text-capitalize main-title"> مدرسه <%= SchoolName %> </h4>
         <div class="row">
             <ol class="breadcrumb">
@@ -22,9 +22,9 @@
         </div>
         <!--/.row-->
 
-        <div class="querys">
-
-            <h3 class="text-center"> قائمه الفصل <%= className %> </h3>
+        <div class="querys">    
+            <input type="hidden" class="classId" value="<%= classDetails.id %>">
+            <h3 class="text-center"> قائمه الفصل <%= classDetails.class_name %> </h3>
 
             <table class="table table-striped">
                 <thead>
@@ -37,16 +37,17 @@
                 <tbody>
                     <% for(let lang of classLangs) {  %>
                     <tr class="parent">
-                        <td> <%= lang.subj_name %> </td>
-                        <input type="hidden" class="classId" value="<%= lang.class_id %>">
+                        <td> <%= lang.sub_name %> </td>
                         <input type="hidden" class="subjId" value="<%= lang.subject_id %>">
                         <td>
                             <select class="form-control teachId">
-                                <% filterTeach = teachers.filter(item => item.teaching_subj == lang.subj_name) %>
-                                <% for(let teacher of filterTeach) {  %>
-                                <option selected="<% teacher.teach_id == lang.teach_id ? 'true' : 'false' %>"
-                                    value="<%= teacher.teach_id %>">
-                                    <%= teacher.teach_name + ' - ' + teacher.teaching_subj  %> </option>
+                                <option selected=selected > حدد من القائمه </option>
+
+                                <% filterTeach = teachers.filter(item => item.teaching_subj == lang.sub_name) %>
+                                <% for(let teacher of filterTeach) {  %>    
+                                <option value="<%= teacher.teach_id %>" <%= teacher.teach_id == lang.teacher_id ? 'selected' : '' %> >
+                                    <%= teacher.teach_name + ' - ' + teacher.teaching_subj  %>
+                                 </option>
                                 <% } %>
                             </select>
                         </td>
@@ -70,14 +71,25 @@
         $(".edit").click(function () {
             const parent = $(this).parents(".parent")
             const data = {
-                classId: parent.find('.classId').val(),
+                classId: $('.classId').val(),
                 subjId: parent.find(".subjId").val(),
                 teachId: parent.find(".teachId").val()
             }
+            // return console.log(data)
             axios.post("/class/change-teacher", data).then(result => {
-                console.log(result)
+                if(result.data.msg) {
+                    $(".alert.msg").addClass("alert-info").html(result.data.msg).fadeIn(500, ()=> {
+                        $(".alert.msg").delay(1000).fadeOut(500)
+                    })
+                } else {
+                    $(".alert.msg").addClass("alert-danger").html(result.data.err).fadeIn(500, ()=> {
+                        $(this).delay(1200).fadeOut(300)
+                    })
+                }
             }).catch(err => {
-               console.log(err) 
+                $(".alert.msg").addClass("alert-danger").html(err).fadeIn(500, ()=> {
+                        $(this).delay(1200).fadeOut(300)
+                    })
             })
         })
     </script>

@@ -9,6 +9,8 @@ router.get("/", teacherController.getTeacherHome)
 
 router.get('/add', teacherController.getAddTeacherPage)
 
+router.get("/teacher-schedule", teacherController.getTeeacherSchedulePage)
+
 router.post('/add',
 multer({
   storage: multer.diskStorage({
@@ -25,6 +27,8 @@ teacherController.postNewTeacher)
 router.post("/search", bodyParser, teacherController.postSearchTeacher)
 
 router.post("/delete/:id", bodyParser, teacherController.getDeleteTeacher)
+
+router.get("/teacher-schedule/:userid", bodyParser, teacherController.getTeeacherSchedulePage)
 
 router.get("/:id", teacherController.displayTeacherData)
 

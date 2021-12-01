@@ -1,3 +1,8 @@
+
+<div class="alert msg text-center">
+		asdasdasd
+</div>
+
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 				<div class="profile-userpic">
@@ -8,7 +13,7 @@
 			<div class="profile-usertitle">
 				<% if(currentUser) {  %>
 					<div class="profile-usertitle-name"> <%= currentUser.name %> </div>
-					<% } %>
+				<% } %>
 			</div>
 			
 			<div class="clear"></div>
@@ -18,13 +23,24 @@
 			<button class="btn bg-light mr-auto ml-auto d-block text-white mt-2" type="button" >
 				<a href="/auth/register"> Add User </a>
 			</button>
-			<% } %>
+		<% } else if ( controlLevel === 'teacher' && activeTab == 'home' ) {  %>
+			<button class="btn bg-light mr-auto ml-auto d-block text-white mt-2" type="button" >
+				<a href="/teacher/teacher-schedule/<%= currentUser %>"> الجــدول </a>
+			</button>
+		<% } %>
 		<ul class="nav menu">
-			<li class="<%= activeTab == 'home'? 'active' : '' %>"><a href="/"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li class="<%= activeTab == 'teacher'? 'active' : '' %>"><a href="/teacher"><em class="fa fa-bar-chart">&nbsp;</em> المدرسين</a></li>
-			<li class="<%= activeTab == 'student'? 'active' : '' %>"><a href="/student"><em class="fa fa-calendar">&nbsp;</em> الطلاب</a></li>
+			<li class="<%= activeTab == 'home'? 'active' : '' %>"><a href="/"><em class="fa fa-home">&nbsp;</em> الصفحه الرئيسيه</a></li>
+			<% if(controlLevel === 'admin') { %>
+				<li class="<%= activeTab == 'teacher'? 'active' : '' %>"><a href="/teacher"><i class="fas fa-chalkboard-teacher"></i> المدرسين</a></li>
+			<% } %>
+			<li class="<%= activeTab == 'student'? 'active' : '' %>"><a href="/student"><i class="fas fa-user-graduate"></i> الطلاب</a></li>
 			<li class="<%= activeTab == 'class'? 'active' : '' %>"><a href="/class"><em class="fa fa-calendar">&nbsp;</em> الفصول </a></li>
-			<li class="<%= activeTab == 'exam'? 'active' : '' %>"><a href="/exam"><em class="fa fa-toggle-off">&nbsp;</em> النتيجه</a></li>
-			<li ><a href="/auth/logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<% if(controlLevel === 'admin' ) {  %>
+				<li class="<%= activeTab == 'exam'? 'active' : '' %>"><a href="/exam"><i class="fas fa-poll">&nbsp;</i> النتيجه</a></li>
+				<% } %>
+			<li ><a href="/auth/logout"><em class="fa fa-power-off">&nbsp;</em> تسجيل خروج</a></li>
+			<button class="btn btn-danger"> 
+				<i class="fa fa-close"></i>	
+			</button>
 		</ul>
 	</div>

@@ -9,7 +9,7 @@
 	<%- include("parts/side-bar")%>
 	<!--/.sidebar-->
 
-	<div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+	<div class="dashboard mb-4 col-sm-9 col-lg-10 main">
 		<h4 class="text-center text-capitalize main-title"> مدرسه <%= SchoolName %> </h4>
 		<div class="row">
 			<ol class="breadcrumb">
@@ -42,9 +42,22 @@
 	<div class="fixed search-form">
 		<i class="fa fa-window-close"></i>
 		<form action="/student/search" method="GET" class="form">
+			<% if(controlLevel == 'teacher') {  %>
+				<div class="form-group relative">
+					<label> حدد الفصل </label>
+					<select required class="form-control" id="class" name="classId">
+						<option value="" selected> أخنر من القائمه </option>
+						<% for(let clss of teacherClasses) {  %>
+							<option value="<%= clss.class_id %>">  <%= clss.class_name %> </option>
+						<% } %>
+					</select>
+					<i class="fa fa-angle-down"></i>
+				</div>
+			<% } %>
+
 			<div class="form-group">
 				<label> نوع البحث </label>
-				<select class="form-control typeSearch" name="search">
+				<select required class="form-control typeSearch" name="search">
 					<option selected> أختر من القائمه </option>
 					<option value="ssn"> البحث بالرقم القومي </option>
 					<option value="name"> البحث بالاسم </option>
@@ -53,27 +66,11 @@
 
 			<div class="form-group">
 				<label> رقم القومي او اسم الطالب </label>
-				<input class="form-control searchValue" type="text" placeholder="أدخل رقم القومى او اسم الطالب"
+				<input required class="form-control searchValue" type="text" placeholder="أدخل رقم القومى او اسم الطالب"
 					name="searchValue">
 			</div>
 
-			<% if(controlLevel == 'teacher') {  %>
-				<div class="form-group relative">
-					<label> حدد الفصل </label>
-					<select class="form-control" id="class" name="class">
-						<option value="" selected> أخنر من القائمه </option>
-						<% allClass = classList.filter(item =>  {
-							return arrowedClasses.filter(anotherItem => {
-								return item.id === anotherItem.id
-							})
-						} ) %>
-						<% for(let clss of allClass) {  %>
-							<option value="<%= clss.id %>"> <%= clss.class_name %> </option>
-						<% } %>
-					</select>
-					<i class="fa fa-angle-down"></i>
-				</div>
-			<% } %>
+
 
 			<button type="submit" class="btn btn-primary"> أرسال </button>
 		</form>
@@ -84,20 +81,19 @@
 		<form action="/student/classlist" method="GET" class="form">
 
 			<div class="form-group relative">
-				<label> حدد الصف </label>
-				<select class="form-control relative" id="level" name="level">
-					<option value="" selected> أخنر من القائمه </option>
-					<% for(let level of levels) {  %>
-					<option value="<%= level.level_id %>"> <%= level.level_name %> </option>
-					<% } %>
-				</select>
-				<i class="fa fa-angle-down"></i>
-			</div>
-
-			<div class="form-group relative">
 				<label> حدد الفصل </label>
 				<select class="form-control" id="class" name="class">
 					<option value="" selected> أخنر من القائمه </option>
+					<% if(controlLevel == 'teacher' ) {  %>
+						<% for(let clss of teacherClasses) {  %>
+							<option value="<%= clss.class_id %>">  <%= clss.class_name %> </option>
+						<% } %>
+					<% } else {  %>
+						<% for(let clss of classList) {  %>
+							<option value="<%= clss.id %>">  <%= clss.class_name %> </option>
+						<% } %>
+					<% } %>
+					
 				</select>
 				<i class="fa fa-angle-down"></i>
 			</div>

@@ -14,9 +14,25 @@ body {
   padding: 4px;
 }
 
+tbody td p {
+  margin-bottom: 2px;
+  font-weight: 300;
+  color: #000;
+}
+
 
 p {
   color: #777;
+}
+
+.table>tbody>tr>th {
+  text-align: center;
+}
+
+.table>tbody>tr>td span {
+  display:block;
+  font-size: 10px;
+  line-height: 2;
 }
 
 a,
@@ -96,6 +112,8 @@ input.form-control {
   border: 1px solid #ddd;
   box-shadow: none;
   height: 46px;
+  font-size: 13px;
+  /* padding: 8px 4px !important; */
 }
 
 .bootstrap-table input.form-control {
@@ -1128,7 +1146,6 @@ a.label:focus {
   display: inline-block;
   margin-top: 14px;
   margin-right: 10px;
-  float: right;
   list-style: none;
   padding: 0;
 }
@@ -1142,14 +1159,6 @@ a.label:focus {
   text-decoration: none;
 }
 
-.sidebar {
-  display: block;
-  padding: 0;
-  display: none;
-  box-shadow: none;
-  background: #fff;
-}
-
 .sidebar ul {
   margin: 20px 0px;
   padding: 0;
@@ -1160,24 +1169,28 @@ a.label:focus {
   margin: 10px 10px 20px 10px;
 }
 
-@media (min-width: 768px) {
-  .sidebar {
-    display: block;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 5;
-    display: block;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
+.sidebar ul i {
+  margin-left: 8px;
+}
 
-  .navbar-header {
-    width: 100%;
-  }
+.sidebar {
+  display: block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 5;
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: transform .7s ease-in;
+  background-color: #fff;
+}
+
+.navbar-header {
+  width: 100%;
 }
 
 .sidebar ul.nav a:hover,
@@ -1241,6 +1254,32 @@ a.label:focus {
   margin: 0px 0;
 }
 
+/* .sidebar .btn-danger {
+  display:none;
+} */
+
+@media (max-width: 767px) {
+  .sidebar {
+    height: 100Vh;
+    width: 250px;
+    background-color: #fff;
+    transform: translateX(250px);
+  }
+
+  .sidebar ul li {
+    border-top: 1px dotted #eee;
+  }
+
+  .sidebar .btn-danger {
+    margin:auto;
+    position: absolute;
+    bottom: 25px;
+    right: 20px;
+    left: 20px;
+    width: 180px;
+  }
+}
+
 
 /*** start global rules ***/
 
@@ -1274,11 +1313,12 @@ h3,
 h4,
 p,
 div,
-li{
+li {
   font-family: cairo;
 }
 
-button, select {
+button,
+select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -1290,6 +1330,7 @@ button, select {
 
 .form-control {
   border: 1px solid #e6e6e6;
+  margin:auto;
 }
 
 .relative .fa-angle-down {
@@ -1298,9 +1339,33 @@ button, select {
   left: 15px;
 }
 
+.fixed .form-group {
+  margin-top: 7px;
+}
 
 /**** start dashboard ****/
 
+.dashboard .main-row {
+  background-color: #ededed;
+  margin: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 18px;
+  border-radius: 4px;
+}
+
+.dashboard .main-row .user {
+  cursor: pointer;
+}
+
+.dashboard .main-row>div {
+  padding-top: 3px;
+}
+
+.dashboard .main-row p {
+  display: inline-block;
+  margin-bottom: 0;
+}
 
 .dashboard .main-title {
   font-size: 26px;
@@ -1320,10 +1385,7 @@ button, select {
   padding: 15px 0;
   margin-top: 0;
   background-color: #fff;
-}
-
-.dashboard div[class*="col-"] {
-  float: right !important;
+  margin-bottom: 15px;
 }
 
 .dashboard .dash-body {
@@ -1336,6 +1398,36 @@ button, select {
   display: flex;
   justify-content: center;
   margin: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .dashboard {
+    float: left !important;
+  }
+
+  .sidebar .btn {
+    display:none;
+  }
+
+  .dashboard .user {
+    display:none;
+  }
+}
+
+@media (max-width: 767px) {
+  .dashboard .main-title {
+    font-size: 16px;
+    margin: 20px 0;
+  }
+
+
+  .panel-container .fa {
+    font-size: 1.5em;
+  }
+
+  .panel-container .large {
+    font-size: 1.5em;
+  }
 }
 
 /*** start students ***/
@@ -1352,56 +1444,58 @@ button, select {
   width: 48%;
   height: 50px;
   background: #fff;
-  line-height: 40px;
-  text-align:center;
-  display:block;
+  line-height: 44px;
+  text-align: center;
+  display: block;
   margin: 0 auto;
   margin-top: 20px;
   cursor: pointer;
   border-bottom: 2px solid var(--mainColor);
-  font-size: 18px;
-
+  font-size: 17px;
 }
 
 .querys li a {
   font-weight: 300;
   color: #777;
-  width:100%;
+  width: 100%;
   height: 100%;
   text-decoration: NONE;
-  display:inline-block;
+  display: inline-block;
 }
 
 .fixed select.form-control {
   height: 46px;
+  font-size: 15px;
+}
+
+.fixed .form {
+  width: 32%;
+  padding: 45px 35px 30px;
+  background-color: #e4e4e4;
+  border-radius: 8px;
+  margin: auto;
+  transform: translatey(50%);
 }
 
 .fixed .form .btn {
   display: block;
   width: 100px;
-  margin:  0 auto;
+  margin: 0 auto;
   margin-top: 25px;
   outline: none;
 }
 
 .fixed {
   position: fixed;
-  top:0;
+  top: 0;
   bottom: 0;
   right: 0;
-  left:0;
-  background-color: rgba(0,0,0,.6);
+  left: 0;
+  background-color: rgba(0, 0, 0, .6);
   z-index: 20;
 }
 
-.fixed .form {
-  width: 30%;
-  padding: 45px 35px 30px;
-  background-color: #e4e4e4;
-  border-radius: 8px;
-  margin:auto;
-  transform: translatey(50%);
-}
+
 
 .fixed .fa-window-close {
   position: absolute;
@@ -1413,8 +1507,8 @@ button, select {
 
 .table {
   margin: 0 15px;
-  margin-top : 20px;
-  text-align:center;
+  margin-top: 20px;
+  text-align: center;
   width: 97%;
 }
 
@@ -1425,7 +1519,28 @@ button, select {
 .table tbody button {
   border: 1px solid #ccc;
   outline: none
-} 
+}
+
+
+@media (max-width: 767px) {
+  .querys li {
+    font-size: 13px;
+    height: 43px;
+  }
+
+  .fixed .form {
+    width:70%;
+  }
+
+  .dashboard .dash-body,
+  .dashboard .main-row {
+    margin-left:0;
+    margin-right:0;
+  }
+}
+
+
+
 
 
 
@@ -1440,7 +1555,7 @@ button, select {
   margin-top: 0;
 }
 
-.data-student ul li  {
+.data-student ul li {
   margin-bottom: 13px;
 }
 
@@ -1451,7 +1566,7 @@ button, select {
 .data-student ul li span {
   font-weight: 600;
   width: 110px;
-  display:inline-block;
+  display: inline-block;
 }
 
 .data-student .btn {
@@ -1477,16 +1592,16 @@ button, select {
 
 
 .container-form form h4 {
-  margin-top: 30px;
+  margin-top: 20px;
+  font-size: 18px;
 }
 
 .container-form form label {
   font-weight: 300;
+  font-size: 12px;
+    margin-top: 5px;
 }
 
-.container-form form h4 {
-  margin-top: 25px;
-}
 
 .container-form .image-container {
   height: 160px;
@@ -1517,7 +1632,7 @@ button, select {
   transform: translatex(-14px);
 }
 
-.content .head > div div {
+.content .head>div div {
   margin-top: 4px;
 }
 
@@ -1586,7 +1701,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /*** start edit form in add term marks ***/
 
 .fixed {
-  display:none;
+  display: none;
 }
 
 .form-edit {
@@ -1594,18 +1709,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 td input[type='number'] {
-  border:0;
+  border: 0;
   text-align: center;
   background-color: transparent;
-  text-align:center;
+  text-align: center;
   outline: none;
   height: 29px;
   width: 36%;
-  border-radius:3px;
+  border-radius: 3px;
 }
 
 td input[type='number'].error {
-  background-color:#fba9a9;
+  background-color: #fba9a9;
   color: #Fff
 }
 
@@ -1640,7 +1755,7 @@ td input[type='number']:focus {
   margin-right: 5px;
 }
 
-.profile-userpic  {
+.profile-userpic {
   position: relative;
 }
 
@@ -1669,7 +1784,7 @@ td input[type='number']:focus {
 .profile-usertitle-name {
   font-size: 20px;
   margin-bottom: 0px;
-  text-align:center;
+  text-align: center;
 }
 
 .profile-usertitle-status {
@@ -1684,7 +1799,7 @@ td input[type='number']:focus {
   border-radius: 0;
   padding: 10px 15px 10px 15px;
   background: #e9ecf2;
-  margin: 0 30px;
+  margin: 0 16px;
   border-radius: 4px;
 }
 
@@ -1742,66 +1857,7 @@ h1.page-header {
   color: #ef4040;
 }
 
-#calendar,
-.datepicker-inline {
-  width: 100%;
-}
 
-#calendar table {
-  width: 100%;
-}
-
-.datepicker-switch {
-  font-size: 16px;
-  height: 46px !important;
-}
-
-.datepicker table tr td.old,
-.datepicker table tr td.new {
-  color: #c5c7cc;
-}
-
-.datepicker table tr td {
-  padding: 10px !important;
-}
-
-.datepicker table tr td.active,
-.datepicker table tr td.active:hover,
-.datepicker table tr td.active.disabled,
-.datepicker table tr td.active.disabled:hover,
-.datepicker table tr td.active:hover,
-.datepicker table tr td.active:hover:hover,
-.datepicker table tr td.active.disabled:hover,
-.datepicker table tr td.active.disabled:hover:hover,
-.datepicker table tr td.active:focus,
-.datepicker table tr td.active:hover:focus,
-.datepicker table tr td.active.disabled:focus,
-.datepicker table tr td.active.disabled:hover:focus,
-.datepicker table tr td.active:active,
-.datepicker table tr td.active:hover:active,
-.datepicker table tr td.active.disabled:active,
-.datepicker table tr td.active.disabled:hover:active,
-.datepicker table tr td.active.active,
-.datepicker table tr td.active:hover.active,
-.datepicker table tr td.active.disabled.active,
-.datepicker table tr td.active.disabled:hover.active,
-.open .dropdown-toggle.datepicker table tr td.active,
-.open .dropdown-toggle.datepicker table tr td.active:hover,
-.open .dropdown-toggle.datepicker table tr td.active.disabled,
-.open .dropdown-toggle.datepicker table tr td.active.disabled:hover {
-  color: #ffffff;
-  background-color: #30a5ff;
-  text-shadow: none;
-  border-color: #285e8e;
-}
-
-.datepicker table tr td span:hover,
-.datepicker thead tr:first-child th:hover,
-.datepicker tfoot tr th:hover,
-.datepicker table tr td.day:hover,
-.datepicker table tr td.day.focused {
-  background: rgba(0, 0, 0, 0.05);
-}
 
 .todo-list {
   padding: 0;
@@ -1842,39 +1898,6 @@ a.todo-list-item:focus {
 
 .todo-list .fa-trash:hover {
   color: #ef4040;
-}
-
-.chat .panel-body ul {
-  list-style: none;
-  margin: -15px;
-  padding: 15px;
-}
-
-.chat .panel-body ul li {
-  margin-bottom: 10px;
-  padding: 15px 5px;
-  border-bottom: 1px solid #e9ecf2;
-}
-
-.chat ul li.left .chat-body {
-  margin-left: 80px;
-}
-
-.chat ul li.right .chat-body {
-  margin-right: 80px;
-}
-
-.chat ul li .chat-body p {
-  margin: 0;
-}
-
-.chat .panel-body {
-  overflow-y: scroll;
-  height: 300px;
-}
-
-.chat-body small {
-  margin-left: 5px;
 }
 
 .table {
@@ -1922,3 +1945,4 @@ p.back-link {
   font-size: 12px;
   text-transform: uppercase;
 }
+

@@ -29,6 +29,43 @@ a {
     margin-bottom: 4px;
 }
 
+.alert.msg {
+    position: fixed;
+    top:4px; 
+    left: 50%;
+    transform:translatex(-50%);
+    z-index: 90;
+    width: 45%;
+    padding: 9px;
+    font-size: 17px;
+    display:none;
+}
+
+.edit-schedule td {
+    padding-left:0 !important;
+    padding-right: 0 !important;
+
+}
+
+
+.edit-schedule td select,
+.edit-schedule td select::-moz-focus-inner {
+    border:0;
+    background-color: transparent;
+    outline: none;
+    font-size: 12px;
+    padding: 3px;
+}
+
+.edit-schedule td select option,
+.edit-schedule td select option::selection{
+    border: 0
+}
+
+.edit-schedule td select option:(even) {
+    background-color: #eee;
+}
+
 
 
 /***** end glocal reules ***/

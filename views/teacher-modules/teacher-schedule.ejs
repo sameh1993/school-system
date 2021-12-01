@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../parts/head") %>
+
+<body dir="rtl">
+
+    <!-- start side bar  -->
+    <%- include("../parts/side-bar")%>
+    <!--/.sidebar-->
+
+
+    <!-- start main section -->
+    <div class="dashboard mb-4 col-sm-9 col-lg-10 main">
+        <h4 class="text-center text-capitalize main-title"> مدرسه <%= SchoolName %> </h4>
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active"> الفصول </li>
+                <li class="active"> جدول المعلم </li>
+            </ol>
+        </div>
+        <!--/.row-->
+
+        <div class="querys">
+
+            <h3 class="text-center"> جدول أ / <%= teachName %> </h3>
+
+
+            <div class="table-resposive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col"> اليوم / الحصه</th>
+                    <th scope="col"> الحصه الاولى </th>
+                    <th scope="col"> الحصه الثانيه </th>
+                    <th scope="col"> الحصه الثالثه </th>
+                    <th scope="col"> الحصه الرابعه </th>
+                    <th scope="col"> الحصه الخامسه </th>
+                    <th scope="col"> الحصه السادسه </th>
+                    <th scope="col"> الحصه السابعه </th>
+                    <th scope="col"> الحصه الثامنه </th>
+                    <th scope="col"> الحصه التاسعه </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <% var firstDays = dataSchedule.filter( el => el.day_id == 2 ) %>
+                    <th scope="row"> الاحد </th>
+                    <% for( let i = 0; i < 9; i++ ) {  %>
+                      <td>
+                        <% const filter = firstDays.filter(el => el.section_name == i + 1) %> 
+                        <% if( filter[0] ) {  %>
+                          <p> <%= filter[0].sub_name %> </p>
+                          <span> <%= filter[0].class_name %> </span>
+                        <% } else {  %>
+                            <p> -- </p>
+                        <% } %>
+                      </td>
+                <% } %>
+                  </tr>
+
+                  <tr>
+                    <% var secondDays = dataSchedule.filter( el => el.day_id == 3 ) %>
+                    <th scope="row"> الاثنين </th>
+                    <% for( let i = 0; i < 9; i++ ) {  %>
+                      <td>
+                        <% const filter = secondDays.filter(el => el.section_name == i + 1) %> 
+                        <% if( filter[0] ) {  %>
+                          <p> <%= filter[0].sub_name %> </p>
+                          <span> <%= filter[0].class_name %> </span>
+                        <% } else {  %>
+                            <p> -- </p>
+                        <% } %>
+                      </td>
+                <% } %>
+                  </tr>
+
+                  <tr>
+                    <% var thirdDays = dataSchedule.filter( el => el.day_id == 4 ) %>
+                    <th scope="row"> الثلاثاء </th>
+                    <% for( let i = 0; i < 9; i++ ) {  %>
+                      <td>
+                        <% const filter = thirdDays.filter(el => el.section_name == i + 1) %> 
+                        <% if( filter[0] ) {  %>
+                          <p> <%= filter[0].sub_name %> </p>
+                          <span> <%= filter[0].class_name %> </span>
+                        <% } else {  %>
+                            <p> -- </p>
+                        <% } %>
+                      </td>
+                <% } %>
+                  </tr>
+
+                  <tr>
+                    <% var fourDays = dataSchedule.filter( el => el.day_id == 5 ) %>
+                    <th scope="row"> الاربعاء </th>
+                    <% for( let i = 0; i < 9; i++ ) {  %>
+                      <td>
+                        <% const filter = fourDays.filter(el => el.section_name == i + 1) %> 
+                        <% if( filter[0] ) {  %>
+                          <p> <%= filter[0].sub_name %> </p>
+                          <span> <%= filter[0].class_name %> </span>
+                        <% } else {  %>
+                            <p> -- </p>
+                        <% } %>
+                      </td>
+                <% } %>
+                  </tr>
+
+                  <tr>
+                    <% var FiveDays= dataSchedule.filter( el => el.day_id == 6 ) %>
+                    <th scope="row"> الخميس </th>
+                    <% for( let i = 0; i < 9; i++ ) {  %>
+                      <td>
+                        <% const filter = FiveDays.filter(el => el.section_name == i + 1) %> 
+                        <% if( filter[0] ) {  %>
+                          <p> <%= filter[0].sub_name %> </p>
+                          <span> <%= filter[0].class_name %> </span>
+                        <% } else {  %>
+                            <p> -- </p>
+                        <% } %>
+                      </td>
+                <% } %>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+        </div>
+
+
+    </div>
+    <!--/.main section-->
+
+
+    <!-- start scripts for js files -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/axios/dist/axios.min.js"></script>
+    <script>
+        $(".edit").click(function () {
+            const parent = $(this).parents(".parent")
+            const data = {
+                classId: parent.find('.classId').val(),
+                subjId: parent.find(".subjId").val(),
+                teachId: parent.find(".teachId").val()
+            }
+            // return console.log(data)
+            axios.post("/class/change-teacher", data).then(result => {
+                // alert(result.data.msg)
+                if(result.data.msg) {
+                    $(".alert.msg").addClass("alert-info").html(result.data.msg).fadeIn(500, ()=> {
+                        $(".alert.msg").delay(1000).fadeOut(500)
+                    })
+                } else {
+                    $(".alert.msg").addClass("alert-danger").html(result.data.err).fadeIn(500, ()=> {
+                        $(this).delay(1200).fadeOut(300)
+                    })
+                }
+            }).catch(err => {
+                $(".alert.msg").addClass("alert-danger").html(err).fadeIn(500, ()=> {
+                        $(this).delay(1200).fadeOut(300)
+                    })
+            })
+        })
+    </script>
+</body>
+
+</html>

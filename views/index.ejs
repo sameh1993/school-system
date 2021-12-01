@@ -6,48 +6,55 @@
 <body dir="rtl">
 
 	<!-- start side bar  -->
-	<%- include("parts/side-bar")%>
-	<!--/.sidebar-->
+	<%- include("parts/side-bar") %>
+	<!--/.sidebar -->
 
-	<div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+	<div class="dashboard mb-4 col-sm-9 col-lg-10 main">
 		<h4 class="text-center text-capitalize main-title"> مدرسه <%= schoolName %> </h4>
-		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="#">
-						<em class="fa fa-home"></em>
-					</a></li>
-				<li class="active">Dashboard</li>
-			</ol>
+		<div class="main-row">
+				<div><a href="/">
+						<em class="fa fa-home text-info"></em>
+					</a> / 
+					<p class="active"> الصفحه الرئيسيه </p>
+				</div>
+				<div class="user">
+					<i class="fa fa-user"></i>
+					user
+				</div>
+		
 		</div>
 		<!--/.row-->
 
 		<div class="panel panel-container dash-body">
 			<div class="row text-center">
+
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-teal panel-widget ">
-						<div class="row no-padding"><em class="fa fa-xl fa-graduation-cap color-blue"></em>
+						<div class="row no-padding"><i class="fas fa-user-graduate fa-xl text-info"></i>
 							<div class="large"> <%= students.length %> </div>
 							<div class="text-muted"> عدد الطلاب </div>
 						</div>
-
 					</div>
 				</div>
+
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-blue panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-comments color-orange"></em>
-							<div class="large">52</div>
+							<div class="large"> <%= teacherCount %> </div>
 							<div class="text-muted"> عدد المدرسين </div>
 						</div>
 					</div>
 				</div>
+
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-blue panel-widget border-right">
-						<div class="row no-padding"><i class="fa fa-graduation-cap" aria-hidden="true"></i></em>
+						<div class="row no-padding"><i class="fa fa-xl fa-graduation-cap" aria-hidden="true"></i></em>
 							<div class="large">52</div>
 							<div class="text-muted"> teachers </div>
 						</div>
 					</div>
 				</div>
+
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-blue panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-comments color-orange"></em>
@@ -61,10 +68,13 @@
 			<!--/.row-->
 		</div>
 
-		<% var studentLevelOne = students.filter(item => item.level_id == 1) %>
-		<% var leveOneSexOne = studentLevelOne.filter(item => item.sex == 1) %>
-		<% var leveOneSexZero = studentLevelOne.filter(item => item.sex == 0) %>
+		
 		<div class="row rows">
+
+
+			<% var studentLevelOne = students.filter(item => item.level_id == 1) %>
+			<% var leveOneSexOne = studentLevelOne.filter(item => item.sex == 1) %>
+			<% var leveOneSexZero = studentLevelOne.filter(item => item.sex == 0) %>
 			<div class="col-12">
 				<div class="item col-sm-6">
 					<h3 class="text-center bg-white"> الصف الاول </h3>

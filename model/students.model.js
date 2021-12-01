@@ -33,11 +33,18 @@ exports.addNewStudent = (data, image) => {
 }
 
 exports.searchStudentBySsn = (data) => {
+    // return console.log(data)
     return new Promise((resolve, reject) => {
         mssql.connect(config, err => {
+            var statement = ``
+            if(data.classId) {
+                statement = `select *, (select class_name from classes s where s.id = a.class_id  ) as class_name from students a where class_id=${+data.classId} and ssn = ${data.searchValue}`
+            } else {
+                statement = `select *, (select class_name from classes s where s.id = a.class_id  ) as class_name from students a where ssn = ${data.searchValue}`
+            }
             if(!err) {
                 const request = new mssql.Request()
-                request.query(`select *, (select class_name from classes s where s.id = a.class_id  ) as class_name from students a where ssn = ${data}`, (error, recordset) => {
+                request.query(statement, (error, recordset) => {
                     if(!error) {
                         resolve(recordset)
                     } else {
@@ -55,8 +62,15 @@ exports.seatchStudentByName = (data) => {
     return new Promise((resolve, reject) => {
         mssql.connect(config, err => {
             if(!err) {
+                var statement = ""
+                if(data.classId) {
+                    statement = `select a.ssn, a.f_name +' '+ a.l_name as fullName, b.class_name, a.parent_no, image from students a inner join classes b on a.class_id = b.id where a.class_id = ${+data.classId} and a.f_name +' '+ l_name like N'%${data.searchValue}%'`
+                } else {
+                    statement = `select a.ssn, a.f_name +' '+ a.l_name as fullName, b.class_name, a.parent_no, image from students a inner join classes b on a.class_id = b.id where a.f_name +' '+ l_name like N'%${data.searchValue}%'`
+                }
+
                 const request = new mssql.Request()
-                request.query(`select a.ssn, a.f_name +' '+ a.l_name as fullName, b.class_name, a.parent_no, image from students a inner join classes b on a.class_id = b.id where a.f_name +' '+ l_name like N'%${data}%'`, (error, recordset) => {
+                request.query(statement, (error, recordset) => {
                     if(!error) {
                         resolve(recordset)
                     } else {
@@ -71,11 +85,12 @@ exports.seatchStudentByName = (data) => {
 }
 
 exports.getClassListOfStudent = (data) => {
+    // return console.log(data)
     return new Promise((resolve, reject) => {
         mssql.connect(config, err => {
             if(!err) {
                 const  request = new mssql.Request()
-                request.query(`select f_name, l_name, b_date, sex from students where level_id = ${+data.level} and class_id = ${+data.class}`, (err, resault) => {
+                request.query(`select f_name, l_name, b_date, sex from students where class_id = ${+data.class}`, (err, resault) => {
                    if(!err) {
                     resolve(resault)
                    } else {

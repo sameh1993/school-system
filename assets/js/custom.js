@@ -5,6 +5,7 @@
 		$(this).find('em').toggleClass("fa-minus");
 	});
 	$(".sidebar span.icon").find('em:first').addClass("fa-plus");
+
 }
 
 (window.jQuery);
@@ -101,10 +102,18 @@ $(document).ready(function () {
 		})
 	})
 
+	$(".sidebar .btn").click(function () {
+		console.log('sameh')
+		$(this).parents(".sidebar").css("transform", "translatex(250px)")
+	})
+
+	$(".user").click(function(){
+		console.log('sameh')
+		$(".sidebar").css("transform", "translatex(0)")
+	})
+
 
 	$(".preview > *").click(function () {
 		$(this).parents(".preview").hide()
 	})
-
-	$('#calendar').datepicker({});
 })

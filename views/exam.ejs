@@ -11,34 +11,6 @@
 
 		<!-- forms -->
 
-		<div class="fixed committees-form">
-				<i class="fa fa-window-close"></i>
-				<form action="/exam/get-committees" method="POST" class="form">
-					<div class="form-group">
-						<label> ادخل الصف </label>
-						<select class="form-control" name="level">
-							<option selected> أختر من القائمه </option>
-							<option value="1"> الصف الاول </option>
-							<option value="2"> الصف الثانى </option>
-							<option value="3"> الصف الثالث </option>
-							<option value="4"> الصف الرابع </option>
-							<option value="5"> الصف الخامس </option>
-							<option value="6"> الصف السادس </option>
-						</select>
-					</div>
-		
-					<div class="form-group">
-						<label> ادخل النوع </label>
-						<select class="form-control" name="sex">
-							<option selected> أختر من القائمه </option>
-							<option value="1"> ذكور </option>
-							<option value="0"> اناث </option>
-						</select>
-					</div>
-		
-					<button type="submit" class="btn btn-primary"> أرسال </button>
-				</form>
-			</div>
 		
 			<div class="fixed committees-form">
 				<i class="fa fa-window-close"></i>
@@ -64,6 +36,12 @@
 							<option value="0"> اناث </option>
 						</select>
 					</div>
+
+					<div class="form-group">
+						<label> ادهل عدد الطلاب باللجنه </label>
+						<input name="studentCount" type="number" placeholder="عدد الطلاب باللجنه"  class="form-control">
+					</div>
+					
 		
 					<button type="submit" class="btn btn-primary"> أرسال </button>
 				</form>
@@ -185,7 +163,7 @@
 				</form>
 			</div>
 
-	<div style="float: left" class="dashboard mb-4 col-sm-9 col-lg-10 main">
+	<div class="dashboard mb-4 col-sm-9 col-lg-10 main">
 		<h4 class="text-center text-capitalize main-title"> مدرسه السلام المشتركه ف 1 </h4>
 		<div class="row">
 			<ol class="breadcrumb">

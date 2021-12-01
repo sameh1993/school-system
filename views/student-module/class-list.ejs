@@ -12,24 +12,24 @@
             <% var studentBoys = students.filter(item => item.sex == 1) %>
             <% var studentGirl = students.filter(item => item.sex == 0) %>
             <div class="tbody">
-                    <div class="row head">
-                            <div class="col-md-6 col-sm-12">
-                                <div> <span> المحافظه </span> : <%= config.city_name %> </div>
-                                <div> <span> الاداره </span> : <%= config.organiztion %> </div>
-                                <div> <span> المدرسه </span> : <%= config.school_name %> </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div> <span> الصف </span> : <%= levelName %> </div>
-                                <div> <span> الفصل </span> : <%= className %> </div>
-                            </div>
-                        </div>
+                <div class="row head">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div> <span> المحافظه </span> : <%= config.city_name %> </div>
+                        <div> <span> الاداره </span> : <%= config.organiztion %> </div>
+                        <div> <span> المدرسه </span> : <%= config.school_name %> </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                        <div> <span> الصف </span> : <%= levelName %> </div>
+                        <div> <span> الفصل </span> : <%= className %> </div>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">م</th>
-                                    <th scope="col">   الاسم بالكامل <span> ( طلاب) </span></th>
+                                    <th scope="col"> الاسم بالكامل <span> ( طلاب) </span></th>
                                     <th scope="col"> تاريخ الميلاد </th>
                                 </tr>
                             </thead>
@@ -41,18 +41,17 @@
                                     <td> <%= studentBoys[i].b_date %> </td>
                                 </tr>
                                 <% } %>
-
                             </tbody>
                         </table>
 
                     </div>
 
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">م</th>
-                                    <th scope="col">   الاسم بالكامل <span> ( طالبات) </span></th>
+                                    <th scope="col"> الاسم بالكامل <span> ( طالبات) </span></th>
                                     <th scope="col"> تاريخ الميلاد </th>
                                 </tr>
                             </thead>
@@ -64,15 +63,12 @@
                                     <td> <%= studentGirl[l].b_date %> </td>
                                 </tr>
                                 <% } %>
-
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
 </body>

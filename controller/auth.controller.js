@@ -18,16 +18,16 @@ exports.postLogin = (req, res, next) => {
         authModel.loginUser(req.body).then(result => {
             res.redirect("/")
             req.session.userid = result.id
-            req.session.controlLevel = result.isAdmin
             req.session.currentUser = {
-                image: result.image,
-                name: result.name
+                name : result.name,
+                image: result.image
             }
+            req.session.controlLevel = result.isAdmin
             req.session.save()
+            console.log(result)
         }).catch(err => {
             req.flash("authError", err)
             res.redirect("/auth/login")
-            console.log(err)
         })
     } else {
         req.flash("validationError", validatorResult(req).array())
@@ -54,7 +54,6 @@ exports.postRegister = (req, res, next) => {
         }).catch(err => {
             req.flash("authRegistErrors", err)
             res.redirect("/auth/register")
-            console.log(err)
         })
     } else {
         req.flash("validregisterErrors", validatorResult(req).array())

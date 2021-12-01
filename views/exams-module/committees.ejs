@@ -19,14 +19,28 @@
           </tr>
         </thead>
         <tbody>
-          
-          <% for(let i=0; i < committees.length; i++ ) { %>
-            <tr>
-                <th class="text-center"> <%= i + 1 %></th>
-                <td> <a href="/student/<%= committees[i].ssn %>"> <%=  committees[i].fullname %> </a> </td>
-                <td> <%= committees[i].sitting_no %> </td>
-            </tr>
+
+          <% const commCount = +committees.length / studentCount %>
+
+          <% for(let looping=1; looping <= commCount; looping++ ) {  %>
+
+            <% for(i = looping != 1 ? student : 0; i < (i + studentCount) - 1; i++ ) { %>
+              <% if(i < +committees.length ) {  %>
+
+                <tr>
+                  <th class="text-center"> <%= i + 1 %></th>
+                  <td> <a href="/student/<%= committees[i].ssn %>"> <%=  committees[i].fullname %> </a> </td>
+                  <td> <%= committees[i].sitting_no %> </td>
+              </tr>
+              <% } else {  %>
+                  <div>sameh</div>
+                <% }  %>
+            <% } %>
+            <% let student = looping * studentCount %>
+              
           <% } %>
+          
+          
   
         </tbody>
       </table>

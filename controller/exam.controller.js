@@ -29,8 +29,10 @@ exports.getCreateCommittees = (req, res, next) => {
 }
 
 exports.postCommittees = (req, res, next) => {
+    // return console.log(req.body)
     committeesModel.getCommitteesByLevelAndSex(req.body).then(resault => {
         db('select * from configeration').then(config => {
+            // return console.log(resault)
             res.render("exams-module/committees", {
                 // configeration page
                 title: "Exams Page",
@@ -40,8 +42,10 @@ exports.postCommittees = (req, res, next) => {
                 controlLevel : req.session.controlLevel === 'admin',
                 // body page
                 committees: resault.recordset,
-                config: config.recordset[0]
+                config: config.recordset[0],
+                studentCount: +req.body.studentCount
             })
+
         })
     })
 }

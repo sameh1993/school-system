@@ -54,13 +54,7 @@ app.use(express.static(path.join(__dirname, "node_modules")))
  *    create a middlewares ( routes ) for app
  */
 
-app.use((req, res, next) => {
-  db('select * from configeration').then(resault => {
-    req.dataSchool = resault
-    console.log(req.session.userid)
-  })
-  next()
-})
+
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -68,6 +62,14 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "*");
   next();
 });
+
+// meddlewares routes
+app.use((req, res, next) => {
+  db('select * from configeration').then(resault => {
+    req.dataSchool = resault
+  })
+  next()
+})
 
 const HomeRoutes = require("./routes/home.router")
 app.use("/", HomeRoutes)
@@ -78,7 +80,6 @@ app.use("/teacher", teacherRoutes)
 const StudentRoutes = require("./routes/student.router")
 app.use("/student", StudentRoutes)
 
-
 const resaultRoutes = require("./routes/exam.route")
 app.use('/exam', resaultRoutes)
 
@@ -87,7 +88,6 @@ app.use('/class', classRoutes)
 
 const authRoutes = require("./routes/auth.route")
 app.use("/auth", authRoutes)
-
 
 
 const port = process.env.PORT || 3000

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../parts/head") %>
+
+<body dir="rtl">
+
+    <!-- start side bar  -->
+    <%- include("../parts/side-bar")%>
+    <!--/.sidebar-->
+
+
+    <!-- start main section -->
+    <div class="dashboard mb-4 col-sm-9 col-lg-10 main">
+        <h4 class="text-center text-capitalize main-title"> مدرسه <%= SchoolName %> </h4>
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                        <em class="fa fa-home"></em>
+                    </a></li>
+                <li class="active"> الفصول </li>
+                <li class="active"> جدول الفصل </li>
+            </ol>
+        </div>
+        <!--/.row-->
+
+        <div class="querys">
+
+            <h3 class="text-center"> جدول الفصل <%= classDetails.className %> </h3>
+
+
+            <div class="table-resposive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col"> اليوم / الحصه</th>
+                    <th scope="col"> الحصه الاولى </th>
+                    <th scope="col"> الحصه الثانيه </th>
+                    <th scope="col"> الحصه الثالثه </th>
+                    <th scope="col"> الحصه الرابعه </th>
+                    <th scope="col"> الحصه الخامسه </th>
+                    <th scope="col"> الحصه السادسه </th>
+                    <th scope="col"> الحصه السابعه </th>
+                    <th scope="col"> الحصه الثامنه </th>
+                    <th scope="col"> الحصه التاسعه </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <% var firstDays = classSchedule.filter( el => el.day_id == 2 ) %>
+                    <th scope="row"> الاحد </th>
+                    <% for( let i = 0; i < 9; i++ ) {  %>
+                          <% if ( firstDays.length > i ) { %>
+                             <td> 
+                               <% if( firstDays[i].subject_teacher_id )  { %>
+                                م/
+                                <%= firstDays[i].teach_name  %> 
+                                  <span> <%= firstDays[i].sub_name %>  </span>
+                                <% } else {  %>
+                                    --
+                                  <% } %>
+                              </td>
+                          <% }  %>
+                    <% } %>
+                  </tr>
+                  <tr>
+                    <th scope="row"> الاثنين </th>
+                    <% var secondDays = classSchedule.filter( el => el.day_id == 3 ) %>
+                    <% for( let i = 0; i < 9; i++ ) {  %>
+                          <% if ( secondDays.length > i ) { %>
+                             <td> 
+                               <% if( secondDays[i].subject_teacher_id )  { %>
+                                م/
+                                <%= secondDays[i].teach_name  %> 
+                                  <span> <%= secondDays[i].sub_name %>  </span>
+                                <% } else {  %>
+                                    --
+                                  <% } %>
+                              </td>
+                          <% }  %>
+                    <% } %>
+                  </tr>
+                  <tr>
+                    <th scope="row"> الثلاثاء </th>
+                    <% var thirdDays = classSchedule.filter( el => el.day_id == 4 ) %>
+                    <% for( let i = 0; i < 9; i++ ) {  %>
+                      <% if ( thirdDays.length > i ) { %>
+                         <td> 
+                           <% if( thirdDays[i].subject_teacher_id )  { %>
+                            م/
+                            <%= thirdDays[i].teach_name  %> 
+                              <span> <%= thirdDays[i].sub_name %>  </span>
+                            <% } else {  %>
+                                --
+                              <% } %>
+                          </td>
+                      <% }  %>
+                <% } %>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"> الاربعاء </th>
+                    <% var fourDays = classSchedule.filter( el => el.day_id == 5 ) %>
+                    <% for( let i = 0; i < 9; i++ ) {  %>
+                      <% if ( fourDays.length > i ) { %>
+                         <td> 
+                           <% if( fourDays[i].subject_teacher_id )  { %>
+                            م/
+                            <%= fourDays[i].teach_name  %> 
+                              <span> <%= fourDays[i].sub_name %>  </span>
+                            <% } else {  %>
+                                --
+                              <% } %>
+                          </td>
+                      <% }  %>
+                <% } %>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"> الخميس </th>
+                    <% var FiveDays = classSchedule.filter( el => el.day_id == 6 ) %>
+                    <% for( let i = 0; i < 9; i++ ) {  %>
+                      <% if ( FiveDays.length > i ) { %>
+                         <td> 
+                           <% if( FiveDays[i].subject_teacher_id )  { %>
+                            م/
+                            <%= FiveDays[i].teach_name  %> 
+                              <span> <%= FiveDays[i].sub_name %>  </span>
+                            <% } else {  %>
+                                --
+                              <% } %>
+                          </td>
+                      <% }  %>
+                <% } %>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+
+
+    </div>
+    <!--/.main section-->
+
+
+    <!-- start scripts for js files -->
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/axios/dist/axios.min.js"></script>
+    <script>
+        $(".edit").click(function () {
+            const parent = $(this).parents(".parent")
+            const data = {
+                classId: parent.find('.classId').val(),
+                subjId: parent.find(".subjId").val(),
+                teachId: parent.find(".teachId").val()
+            }
+            // return console.log(data)
+            axios.post("/class/change-teacher", data).then(result => {
+                // alert(result.data.msg)
+                if(result.data.msg) {
+                    $(".alert.msg").addClass("alert-info").html(result.data.msg).fadeIn(500, ()=> {
+                        $(".alert.msg").delay(1000).fadeOut(500)
+                    })
+                } else {
+                    $(".alert.msg").addClass("alert-danger").html(result.data.err).fadeIn(500, ()=> {
+                        $(this).delay(1200).fadeOut(300)
+                    })
+                }
+            }).catch(err => {
+                $(".alert.msg").addClass("alert-danger").html(err).fadeIn(500, ()=> {
+                        $(this).delay(1200).fadeOut(300)
+                    })
+            })
+        })
+    </script>
+</body>
+
+</html>

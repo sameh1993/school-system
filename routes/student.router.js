@@ -23,18 +23,17 @@ multer({
     }
   })
 }).single('image'),
-// check("f_name").not().isEmpty().withMessage("the field is required").not().isAlphanumeric().withMessage('you must be charcters'),
-// check("l_name").not().isEmpty().withMessage("the field is required").not().isAlpha().withMessage('you must be charcters'),
-// check("nationality").not().isEmpty().withMessage("the field is required").not().isAlpha().withMessage('you must be charcters'),
-// check("sex").not().isEmpty().withMessage("the field is required").not().isAlphanumeric().withMessage('you must be charcters'),
-
- studentController.postAddNewStudent)
+check("f_name").not().isEmpty().withMessage("the field is required").not().isAlphanumeric().withMessage('you must be charcters'),
+check("l_name").not().isEmpty().withMessage("the field is required").not().isAlpha().withMessage('you must be charcters'),
+check("nationality").not().isEmpty().withMessage("the field is required").not().isAlpha().withMessage('you must be charcters'),
+check("sex").not().isEmpty().withMessage("the field is required"),
+studentController.postAddNewStudent)
   
  router.get("/search", bodyParser.urlencoded({ extended: false }), studentController.searchStudentData)
 
  router.post("/delete", bodyParser.urlencoded({ extended: true }), studentController.postDeleteStudentBySsn)
 
- router.get("/classlist", bodyParser.urlencoded({ extended: true }), studentController.postClassList )
+ router.get("/classlist", bodyParser.urlencoded({ extended: true }), studentController.getClassList )
 
  router.get("/level-convert", bodyParser.urlencoded({extended:true}), studentController.getLevelAndClasses)
 

@@ -1,7 +1,10 @@
+// import models 
 const studentModel = require("../model/students.model");
 const classesModel = require("../model/classes.model");
 const sub_student = require("../model/stu_subj.model");
 const committeesModel = require("../model/committees.model")
+const classTeacher = require("../model/classTeacher.model")
+
 const fs = require('fs')
 const db = require("../model/db").db
 const studentValidator = require("express-validator").validationResult
@@ -10,7 +13,7 @@ exports.getStudentPage = (req, res, next) => {
     db("select * from levels").then(levelList => {
         classesModel.getAllClasses().then(classList => {
             const userid = req.session.userid
-            if (userid) {
+            classTeacher.getAllClassesForByTeahcherid(userid).then(classesForTeacher => {
                 res.render('students', {
                     classList: classList.recordset,
                     levels: levelList.recordset,
@@ -19,23 +22,9 @@ exports.getStudentPage = (req, res, next) => {
                     SchoolName: req.dataSchool.recordset[0].school_name,
                     currentUser: req.session.currentUser,
                     controlLevel: req.session.controlLevel,
+                    teacherClasses: userid ? classesForTeacher.recordset : ""
                 })
-            } else {
-                db(`select class_id from teacher_class where teach_id=${userid}`).then(classes => {
-                    // res.render('students', {
-                    //     classList: classList.recordset,
-                    //     levels: levelList.recordset,
-                    //     title: "Student Page",
-                    //     activeTab: 'student',
-                    //     SchoolName: req.dataSchool.recordset[0].school_name,
-                    //     currentUser: req.session.currentUser,
-                    //     controlLevel: req.session.controlLevel,
-                    //     arrowedClasses: classes.recordset
-                    // })
-                    console.log(classList.recordset)
-                    console.log(classes.recordset)
-                })
-            }
+            })
         })
     })
 
@@ -84,7 +73,7 @@ exports.postAddNewStudent = (req, res, next) => {
 }
 
 exports.getStudentBySsn = (req, res, next) => {
-    studentModel.searchStudentBySsn(+req.params.id).then(resault => {
+    studentModel.searchStudentBySsn({searchValue : +req.params.id}).then(resault => {
         res.render("student-module/data-student", {
             // configeration page
             title: "Data Student",
@@ -100,23 +89,10 @@ exports.getStudentBySsn = (req, res, next) => {
 
 
 exports.searchStudentData = (req, res, next) => {
-    if (req.query.search == 'ssn') {
-        studentModel.searchStudentBySsn(+req.query.searchValue).then(resault => {
-            res.render("student-module/data-student", {
-                // configeration page
-                title: "Search Page",
-                activeTab: 'student',
-                SchoolName: req.dataSchool.recordset[0].school_name,
-                currentUser: req.session.currentUser,
-                controlLevel: req.session.controlLevel,
-                // body page
-                student: resault.recordset[0]
-            })
-        }).catch(err => {
-            console.log(err)
-        })
-    } else {
-        studentModel.seatchStudentByName(req.query.searchValue).then(resault => {
+    // return console.log(req.query) 
+    if (req.query.search == 'name') {
+        
+        studentModel.seatchStudentByName(req.query).then(resault => {
             res.render("student-module/search-resault", {
                 // configeration page
                 title: "Search Page",
@@ -130,18 +106,32 @@ exports.searchStudentData = (req, res, next) => {
         }).catch(err => {
             console.log(err)
         })
+    } else {
+        studentModel.searchStudentBySsn(req.query).then(resault => {
+            res.render("student-module/data-student", {
+                // configeration page
+                title: "Search Page",
+                activeTab: 'student',
+                SchoolName: req.dataSchool.recordset[0].school_name,
+                currentUser: req.session.currentUser,
+                controlLevel: req.session.controlLevel,
+                // body page
+                student: resault.recordset[0]
+            })
+        }).catch(err => {
+            console.log(err)
+        })
     }
 }
 
 
 
 
-exports.postClassList = (req, res, next) => {
-
+exports.getClassList = (req, res, next) => {
+    // return console.log(req.query)
     studentModel.getClassListOfStudent(req.query).then(resault => {
         db('select * from configeration').then(config => {
-            db(`select class_name from classes where id = ${+req.query.class}`).then(classRes => {
-                db(`select level_name from levels where level_id = ${+req.query.level}`).then(levelRes => {
+            db(`select class_name, ( select level_name from levels where level_id = a.level_id ) as levelName from classes a where id = ${+req.query.class}`).then(classRes => {
                     res.render("student-module/class-list", {
                         // configeration page
                         title: "Student Page",
@@ -153,9 +143,8 @@ exports.postClassList = (req, res, next) => {
                         students: resault.recordset,
                         config: config.recordset[0],
                         className: classRes.recordset[0].class_name,
-                        levelName: levelRes.recordset[0].level_name
+                        levelName : classRes.recordset[0].levelName
                     })
-                })
             })
         })
 
@@ -166,8 +155,6 @@ exports.postClassList = (req, res, next) => {
 
 
 exports.postDeleteStudentBySsn = (req, res) => {
-
-    // return console.log(req.body)
     committeesModel.deleteStudentBySsn(+req.body.ssn).then(() => {
         sub_student.deleteStudentBySsn(+req.body.ssn).then(() => {
             studentModel.deleteStudentBySsn(+req.body.ssn).then(resault => {
@@ -219,7 +206,7 @@ exports.postconvertLevelAndClass = (req, res, next) => {
             })
         } else {
             res.json({
-                result: "لم يتم تحويل الطالب يرجى المحاله ثانيه"
+                err: "لم يتم تحويل الطالب يرجى المحاله ثانيه"
             })
         }
 
